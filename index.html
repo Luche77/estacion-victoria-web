@@ -9,29 +9,19 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg1: #0a0e27;
-    --bg2: #0d1b4b;
-    --azul: #38bdf8;
-    --naranja: #ff8c00;
-    --violeta: #a78bfa;
-    --blanco: #ffffff;
-    --gris: rgba(255,255,255,0.5);
-    --card: rgba(13,27,75,0.7);
+    --bg1: #0a0e27; --bg2: #0d1b4b; --azul: #38bdf8;
+    --naranja: #ff8c00; --violeta: #a78bfa; --blanco: #ffffff;
+    --gris: rgba(255,255,255,0.5); --card: rgba(13,27,75,0.7);
     --border: rgba(56,189,248,0.2);
   }
-
-  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Cairo', sans-serif;
     background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg1) 100%);
-    background-attachment: fixed;
-    color: var(--blanco);
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-attachment: fixed; color: var(--blanco);
+    min-height: 100vh; overflow-x: hidden;
   }
 
-  /* ESTRELLAS */
   .stars {
     position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background-image:
@@ -40,166 +30,116 @@
       radial-gradient(1px 1px at 50% 20%, rgba(56,189,248,0.3) 0%, transparent 100%),
       radial-gradient(1px 1px at 75% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
       radial-gradient(1px 1px at 90% 40%, rgba(56,189,248,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 60% 50%, rgba(167,139,250,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      radial-gradient(1px 1px at 60% 50%, rgba(167,139,250,0.3) 0%, transparent 100%);
   }
 
   /* HEADER */
   header {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(10,14,39,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(10,14,39,0.92); backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 12px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
+    display: flex; align-items: center; gap: 16px;
   }
-
-  .header-logo {
-    display: flex; align-items: center; gap: 12px;
-  }
-
   .logo-circle {
     width: 44px; height: 44px; border-radius: 50%;
     background: linear-gradient(135deg, var(--bg2), #1e3a6e);
     border: 2px solid var(--azul);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
   }
-
-  .logo-text h1 { font-size: 16px; font-weight: 700; color: var(--blanco); }
+  .logo-text h1 { font-size: 16px; font-weight: 700; }
   .logo-text p { font-size: 11px; color: var(--azul); font-weight: 500; }
 
-  nav { display: flex; gap: 6px; flex-wrap: wrap; }
-  nav a {
-    color: var(--gris); text-decoration: none; font-size: 12px; font-weight: 600;
-    padding: 6px 12px; border-radius: 20px; transition: all 0.2s;
-    border: 1px solid transparent;
+  /* TABS */
+  .tabs-bar {
+    position: sticky; top: 69px; z-index: 90;
+    background: rgba(10,14,39,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; overflow-x: auto; scrollbar-width: none;
   }
-  nav a:hover { color: var(--azul); border-color: var(--border); background: rgba(56,189,248,0.08); }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0; padding: 12px 18px;
+    background: none; border: none; border-bottom: 2px solid transparent;
+    cursor: pointer; font-family: 'Cairo', sans-serif;
+    font-size: 12px; font-weight: 600; color: var(--gris);
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .tab-btn:hover { color: var(--azul); }
+  .tab-btn.activo { color: var(--azul); border-bottom-color: var(--azul); }
+
+  /* SECCIONES */
+  .seccion { display: none; }
+  .seccion.visible { display: block; }
 
   /* MAIN */
   main {
     position: relative; z-index: 1;
     max-width: 900px; margin: 0 auto;
-    padding: 32px 20px 60px;
-    display: flex; flex-direction: column; gap: 24px;
+    padding: 28px 20px 60px;
+    display: flex; flex-direction: column; gap: 20px;
   }
 
-  /* CARD BASE */
+  /* CARD */
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 24px;
-    backdrop-filter: blur(8px);
-    animation: fadeUp 0.5s ease both;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 24px; backdrop-filter: blur(8px);
+    animation: fadeUp 0.4s ease both;
   }
-
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.1s; }
-  .card:nth-child(3) { animation-delay: 0.15s; }
-  .card:nth-child(4) { animation-delay: 0.2s; }
-  .card:nth-child(5) { animation-delay: 0.25s; }
-  .card:nth-child(6) { animation-delay: 0.3s; }
-  .card:nth-child(7) { animation-delay: 0.35s; }
-
   .card-titulo {
     font-size: 11px; font-weight: 700; color: var(--azul);
     letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
     display: flex; align-items: center; gap: 8px;
   }
-  .card-titulo::before {
-    content: ''; width: 3px; height: 14px; background: var(--azul); border-radius: 2px;
-  }
+  .card-titulo::before { content: ''; width: 3px; height: 14px; background: var(--azul); border-radius: 2px; }
 
   /* REPRODUCTOR */
   .player-card { border-color: rgba(56,189,248,0.35); }
-
-  .player-inner {
-    display: flex; align-items: center; gap: 20px;
-    flex-wrap: wrap;
-  }
-
+  .player-inner { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   #btn-play {
     width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
     background: linear-gradient(135deg, #1e2a4a, #0d1b4b);
-    border: 2px solid rgba(56,189,248,0.4);
-    color: white; font-size: 26px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s; position: relative; overflow: hidden;
+    border: 2px solid rgba(56,189,248,0.4); color: white; font-size: 26px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
   }
   #btn-play:hover { border-color: var(--azul); transform: scale(1.05); }
   #btn-play.playing { border-color: var(--naranja); }
   #btn-play.loading { pointer-events: none; }
-
   .spinner {
     display: none; width: 28px; height: 28px;
-    border: 3px solid rgba(255,140,0,0.2);
-    border-top-color: var(--naranja);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    border: 3px solid rgba(255,140,0,0.2); border-top-color: var(--naranja);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  .play-icon { transition: opacity 0.2s; }
-
   .player-info { flex: 1; min-width: 160px; }
-
-  .live-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-    color: var(--blanco); margin-bottom: 6px;
-  }
-  .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #ef4444;
-    animation: pulse-dot 1.5s ease infinite;
-  }
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
+  .live-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; animation: pulse-dot 1.5s ease infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
   .player-nombre { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
   .player-freq { font-size: 13px; color: var(--azul); font-weight: 500; }
-
-  /* BARRAS */
-  .barras {
-    display: flex; align-items: flex-end; gap: 3px; height: 28px;
-    opacity: 0; transition: opacity 0.3s;
-  }
+  .barras { display: flex; align-items: flex-end; gap: 3px; height: 28px; opacity: 0; transition: opacity 0.3s; }
   .barras.activas { opacity: 1; }
-  .barra {
-    width: 4px; background: var(--naranja); border-radius: 2px;
-    animation: barra-anim 0.8s ease infinite alternate;
-  }
-  .barra:nth-child(1) { animation-duration: 0.6s; }
-  .barra:nth-child(2) { animation-duration: 0.8s; animation-delay: 0.1s; }
-  .barra:nth-child(3) { animation-duration: 0.5s; animation-delay: 0.2s; }
-  .barra:nth-child(4) { animation-duration: 0.9s; animation-delay: 0.05s; }
-  .barra:nth-child(5) { animation-duration: 0.7s; animation-delay: 0.15s; }
-  @keyframes barra-anim {
-    from { height: 4px; }
-    to { height: 22px; }
-  }
+  .barra { width: 4px; background: var(--naranja); border-radius: 2px; animation: barra-anim 0.8s ease infinite alternate; }
+  .barra:nth-child(1){animation-duration:0.6s} .barra:nth-child(2){animation-duration:0.8s;animation-delay:0.1s}
+  .barra:nth-child(3){animation-duration:0.5s;animation-delay:0.2s} .barra:nth-child(4){animation-duration:0.9s;animation-delay:0.05s}
+  .barra:nth-child(5){animation-duration:0.7s;animation-delay:0.15s}
+  @keyframes barra-anim { from{height:4px} to{height:22px} }
 
-  /* PROGRAMA EN VIVO */
-  .prog-card { }
-  .prog-status {
-    font-size: 10px; font-weight: 700; letter-spacing: 2px;
-    color: var(--gris); margin-bottom: 4px;
-    display: flex; align-items: center; gap: 6px;
-  }
+  /* PROGRAMA */
+  .prog-status { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gris); margin-bottom: 4px; }
   .prog-status.en-vivo { color: var(--azul); }
   .prog-nombre { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .prog-horario { font-size: 13px; color: var(--azul); font-weight: 500; }
+
+  /* PROGRAMACIÓN y REUNIONES */
+  .prog-item, .reunion-item { padding: 10px 0; border-bottom: 1px solid rgba(56,189,248,0.1); }
+  .prog-item:last-child, .reunion-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .prog-dia, .reunion-dia { font-size: 10px; font-weight: 700; color: var(--azul); letter-spacing: 1px; margin-bottom: 3px; }
+  .prog-nombre-item, .reunion-nombre { font-size: 14px; font-weight: 500; }
 
   /* VERSÍCULO */
   .versiculo-card {
@@ -207,126 +147,57 @@
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 0; border: none;
   }
-  .versiculo-bg {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, #1a3a2a, #0d2137);
-    background-size: cover; background-position: center;
-    transition: background 0.5s;
-  }
-  .versiculo-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%);
-  }
-  .versiculo-contenido {
-    position: relative; z-index: 1;
-    padding: 28px 28px 20px;
-  }
-  .versiculo-etiqueta {
-    font-size: 10px; font-weight: 700; letter-spacing: 2px;
-    color: rgba(255,255,255,0.6); margin-bottom: 10px;
-  }
-  .versiculo-texto {
-    font-size: 16px; font-style: italic; font-weight: 400;
-    line-height: 1.7; color: #fff; margin-bottom: 10px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-  }
-  .versiculo-ref {
-    font-size: 13px; font-weight: 700; color: #fff;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-  }
-  .versiculo-btns {
-    position: relative; z-index: 1;
-    display: flex; gap: 8px; padding: 0 28px 20px;
-  }
+  .versiculo-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a3a2a, #0d2137); transition: background 0.5s; }
+  .versiculo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%); }
+  .versiculo-contenido { position: relative; z-index: 1; padding: 28px 28px 20px; }
+  .versiculo-etiqueta { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+  .versiculo-texto { font-size: 16px; font-style: italic; line-height: 1.7; color: #fff; margin-bottom: 10px; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+  .versiculo-ref { font-size: 13px; font-weight: 700; color: var(--naranja); text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .versiculo-btns { position: relative; z-index: 1; display: flex; gap: 8px; padding: 0 28px 20px; flex-wrap: wrap; }
   .btn-versiculo {
-    flex: 1; padding: 9px; border-radius: 10px; cursor: pointer;
+    flex: 1; min-width: 80px; padding: 9px; border-radius: 10px; cursor: pointer;
     font-family: 'Cairo', sans-serif; font-size: 11px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; gap: 6px;
     background: rgba(10,14,39,0.85); color: #fff;
-    border: 1px solid rgba(56,189,248,0.3);
-    transition: all 0.2s; text-decoration: none;
+    border: 1px solid rgba(56,189,248,0.3); transition: all 0.2s; text-decoration: none;
   }
   .btn-versiculo:hover { background: rgba(56,189,248,0.15); }
   .btn-versiculo.azul { border-left: 3px solid var(--azul); }
   .btn-versiculo.naranja { border-left: 3px solid var(--naranja); }
+  .btn-versiculo.violeta { border-left: 3px solid var(--violeta); }
 
   /* REDES */
-  .redes-grid {
-    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-  }
+  .redes-grid { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
   .btn-red {
     width: 62px; height: 62px; border-radius: 50%;
-    background: rgba(13,27,75,0.9);
-    border: 2px solid rgba(56,189,248,0.5);
+    background: rgba(13,27,75,0.9); border: 2px solid rgba(56,189,248,0.5);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: white; text-decoration: none;
-    transition: all 0.2s; gap: 3px; cursor: pointer;
+    color: white; text-decoration: none; transition: all 0.2s; gap: 3px; cursor: pointer;
   }
   .btn-red:hover { border-color: var(--azul); transform: translateY(-3px); background: rgba(56,189,248,0.1); }
   .btn-red svg { width: 26px; height: 26px; fill: white; }
   .btn-red span { font-size: 9px; font-weight: 600; font-family: 'Cairo', sans-serif; color: white; }
 
-  /* SELECTOR DE FONDO */
-  .fondo-modal {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.75); z-index: 200;
-    align-items: flex-end; justify-content: center;
-  }
-  .fondo-modal.visible { display: flex; }
-  .fondo-box {
-    background: #0d1b4b; border-top-left-radius: 24px; border-top-right-radius: 24px;
-    padding: 20px; width: 100%; max-width: 600px;
-    border-top: 1px solid rgba(56,189,248,0.25);
-  }
-  .fondo-titulo { color: var(--azul); font-weight: 700; font-size: 15px; text-align: center; margin-bottom: 16px; }
-  .fondo-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px; }
-  .fondo-thumb {
-    width: 80px; height: 55px; border-radius: 10px; cursor: pointer;
-    border: 2px solid transparent; transition: all 0.2s;
-  }
-  .fondo-thumb:hover { border-color: var(--azul); transform: scale(1.05); }
-  .fondo-thumb.seleccionado { border-color: var(--azul); }
-  .btn-cerrar-fondo {
-    width: 100%; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3);
-    border-radius: 12px; padding: 12px; color: var(--azul);
-    font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 13px;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .btn-cerrar-fondo:hover { background: rgba(56,189,248,0.2); }
-
-  /* REUNIONES */
-  .reunion-item {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(56,189,248,0.1);
-  }
-  .reunion-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .reunion-dia { font-size: 10px; font-weight: 700; color: var(--azul); letter-spacing: 1px; margin-bottom: 3px; }
-  .reunion-nombre { font-size: 14px; font-weight: 500; color: var(--blanco); }
-
   /* PRÉDICAS */
   .predica-item {
     display: flex; align-items: center; gap: 14px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(56,189,248,0.1);
-    cursor: pointer; transition: background 0.2s; border-radius: 10px;
+    padding: 12px 0; border-bottom: 1px solid rgba(56,189,248,0.1);
+    cursor: pointer; transition: all 0.2s; border-radius: 10px;
   }
   .predica-item:last-child { border-bottom: none; }
   .predica-item:hover { background: rgba(56,189,248,0.05); padding-left: 8px; }
   .predica-item.activa { background: rgba(56,189,248,0.1); padding-left: 8px; }
-
-  .predica-play-btn {
-    width: 42px; height: 42px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; color: var(--azul); transition: transform 0.2s;
-  }
-  .predica-item:hover .predica-play-btn { transform: scale(1.1); }
-
+  .predica-play-btn { width: 42px; height: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
   .predica-info { flex: 1; min-width: 0; }
   .predica-titulo { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .predica-detalle { font-size: 12px; color: var(--azul); margin-top: 2px; }
-
-  .predica-loading { display: none; }
-  .predica-loading.visible { display: block; }
+  .predica-descargar {
+    width: 38px; height: 38px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 50%; font-size: 16px; text-decoration: none; transition: all 0.2s;
+  }
+  .predica-descargar:hover { background: rgba(56,189,248,0.25); transform: scale(1.1); }
 
   /* FORMULARIO */
   .form-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -339,66 +210,43 @@
   .form-input::placeholder { color: rgba(255,255,255,0.3); }
   .form-input:focus { border-color: var(--azul); }
   textarea.form-input { height: 100px; resize: vertical; }
-
   .btn-enviar {
-    background: var(--naranja); color: #000;
-    border: none; border-radius: 12px; padding: 14px;
+    background: var(--naranja); color: #000; border: none; border-radius: 12px; padding: 14px;
     font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: all 0.2s;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;
   }
   .btn-enviar:hover { background: #ffaa33; transform: translateY(-1px); }
 
+  /* SELECTOR FONDO */
+  .fondo-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; align-items: flex-end; justify-content: center; }
+  .fondo-modal.visible { display: flex; }
+  .fondo-box { background: #0d1b4b; border-top-left-radius: 24px; border-top-right-radius: 24px; padding: 20px; width: 100%; max-width: 600px; border-top: 1px solid rgba(56,189,248,0.25); }
+  .fondo-titulo { color: var(--azul); font-weight: 700; font-size: 15px; text-align: center; margin-bottom: 16px; }
+  .fondo-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 16px; }
+  .fondo-thumb { width: 80px; height: 55px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
+  .fondo-thumb:hover { border-color: var(--azul); transform: scale(1.05); }
+  .fondo-thumb.seleccionado { border-color: var(--azul); }
+  .btn-cerrar-fondo { width: 100%; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; padding: 12px; color: var(--azul); font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; }
+
   /* FOOTER */
-  footer {
-    position: relative; z-index: 1;
-    text-align: center; padding: 40px 20px;
-    border-top: 1px solid var(--border);
-  }
+  footer { position: relative; z-index: 1; text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); }
   .footer-nombre { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .footer-slogan { font-size: 15px; color: var(--azul); margin-bottom: 6px; }
   .footer-dir { font-size: 13px; color: var(--gris); margin-bottom: 16px; }
-  .footer-app {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(56,189,248,0.1); border: 1px solid var(--border);
-    border-radius: 20px; padding: 8px 18px;
-    color: var(--azul); font-size: 12px; font-weight: 600; text-decoration: none;
-    transition: all 0.2s;
-  }
+  .footer-app { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,189,248,0.1); border: 1px solid var(--border); border-radius: 20px; padding: 8px 18px; color: var(--azul); font-size: 12px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
   .footer-app:hover { background: rgba(56,189,248,0.2); }
 
-  /* ACCORDION */
-  .accordion-btn {
-    width: 100%; background: none; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between;
-    color: white; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700;
-    padding: 0; transition: color 0.2s;
-  }
-  .accordion-btn:hover { color: var(--azul); }
-  .accordion-icon { font-size: 18px; transition: transform 0.3s; color: var(--azul); }
-  .accordion-content { overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
-  .accordion-content.open { max-height: 600px; }
-  .accordion-inner { padding-top: 16px; }
-
   /* TOAST */
-  .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: rgba(13,27,75,0.95); border: 1px solid var(--azul);
-    color: white; padding: 12px 24px; border-radius: 20px;
-    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 600;
-    transition: transform 0.3s; z-index: 999;
-  }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: rgba(13,27,75,0.95); border: 1px solid var(--azul); color: white; padding: 12px 24px; border-radius: 20px; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 600; transition: transform 0.3s; z-index: 999; }
   .toast.visible { transform: translateX(-50%) translateY(0); }
 
-  /* RESPONSIVE */
   @media (max-width: 600px) {
     header { padding: 10px 16px; }
-    nav { display: none; }
-    main { padding: 20px 14px 50px; gap: 16px; }
-    .card { padding: 18px; }
-    .versiculo-contenido { padding: 20px 20px 14px; }
-    .versiculo-btns { padding: 0 20px 16px; }
-    .player-nombre { font-size: 16px; }
+    main { padding: 16px 12px 50px; gap: 16px; }
+    .card { padding: 16px; }
+    .versiculo-contenido { padding: 18px 18px 12px; }
+    .versiculo-btns { padding: 0 18px 14px; }
+    .tab-btn { padding: 10px 12px; font-size: 11px; }
   }
 </style>
 </head>
@@ -407,80 +255,74 @@
 <div class="stars"></div>
 
 <header>
-  <div class="header-logo">
-    <div class="logo-circle">📻</div>
-    <div class="logo-text">
-      <h1>Estación Victoria</h1>
-      <p>FM 90.7 · Siquem Iglesia Pergamino</p>
-    </div>
+  <div class="logo-circle">📻</div>
+  <div class="logo-text">
+    <h1>Estación Victoria FM 90.7</h1>
+    <p>Siquem Iglesia Pergamino</p>
   </div>
-  <nav>
-    <a href="#radio">Radio</a>
-    <a href="#versiculo">Versículo</a>
-    <a href="#predicas">Prédicas</a>
-    <a href="#reuniones">Reuniones</a>
-    <a href="#oracion">Oración</a>
-  </nav>
 </header>
+
+<div class="tabs-bar">
+  <button class="tab-btn activo" onclick="cambiarTab('radio',this)">📻 Radio</button>
+  <button class="tab-btn" onclick="cambiarTab('versiculo',this)">📖 Versículo</button>
+  <button class="tab-btn" onclick="cambiarTab('predicas',this)">🎙 Prédicas</button>
+  <button class="tab-btn" onclick="cambiarTab('programacion',this)">📅 Programación</button>
+  <button class="tab-btn" onclick="cambiarTab('reuniones',this)">⛪ Reuniones</button>
+  <button class="tab-btn" onclick="cambiarTab('comunidad',this)">💬 Comunidad</button>
+  <button class="tab-btn" onclick="cambiarTab('oracion',this)">🙏 Oración</button>
+</div>
 
 <main>
 
-  <!-- REPRODUCTOR -->
-  <div class="card player-card" id="radio">
-    <div class="card-titulo">Radio en vivo</div>
-    <div class="player-inner">
-      <button id="btn-play" onclick="toggleRadio()">
-        <span class="play-icon" id="play-icon">▶</span>
-        <div class="spinner" id="spinner"></div>
-      </button>
-      <div class="player-info">
-        <div class="live-badge">
-          <div class="live-dot"></div>
-          <span id="radio-status">EN VIVO</span>
+  <!-- RADIO -->
+  <div class="seccion visible" id="sec-radio">
+    <div class="card player-card" style="margin-bottom:20px;">
+      <div class="card-titulo">Radio en vivo</div>
+      <div class="player-inner">
+        <button id="btn-play" onclick="toggleRadio()">
+          <span id="play-icon">▶</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+        <div class="player-info">
+          <div class="live-badge"><div class="live-dot"></div><span id="radio-status">EN VIVO</span></div>
+          <div class="player-nombre">Estación Victoria FM 90.7</div>
+          <div class="player-freq">Siquem Iglesia · Pergamino</div>
         </div>
-        <div class="player-nombre">Estación Victoria FM 90.7</div>
-        <div class="player-freq">Siquem Iglesia · Pergamino</div>
-      </div>
-      <div class="barras" id="barras">
-        <div class="barra" style="height:8px"></div>
-        <div class="barra" style="height:16px"></div>
-        <div class="barra" style="height:22px"></div>
-        <div class="barra" style="height:14px"></div>
-        <div class="barra" style="height:8px"></div>
+        <div class="barras" id="barras">
+          <div class="barra" style="height:8px"></div>
+          <div class="barra" style="height:16px"></div>
+          <div class="barra" style="height:22px"></div>
+          <div class="barra" style="height:14px"></div>
+          <div class="barra" style="height:8px"></div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- PROGRAMA -->
-  <div class="card prog-card" id="prog-card">
-    <div class="prog-status" id="prog-status">PRÓXIMO PROGRAMA</div>
-    <div class="prog-nombre" id="prog-nombre">Mañanas en Victoria</div>
-    <div class="prog-horario" id="prog-horario">Lunes a Viernes 07:00hs</div>
+    <div class="card">
+      <div class="prog-status" id="prog-status">PRÓXIMO PROGRAMA</div>
+      <div class="prog-nombre" id="prog-nombre">Mañanas en Victoria</div>
+      <div class="prog-horario" id="prog-horario">Lunes a Viernes 07:00hs</div>
+    </div>
   </div>
 
   <!-- VERSÍCULO -->
-  <div class="card versiculo-card" id="versiculo">
-    <div class="versiculo-bg" id="versiculo-bg"></div>
-    <div class="versiculo-overlay"></div>
-    <div class="versiculo-contenido">
-      <div class="versiculo-etiqueta">✦ PROMESA DEL DÍA</div>
-      <div class="versiculo-texto" id="versiculo-texto">Cargando palabra de vida...</div>
-      <div class="versiculo-ref" id="versiculo-ref"></div>
-    </div>
-    <div class="versiculo-btns">
-      <a href="https://www.biblegateway.com/reading-plans/verse-of-the-day/next?version=RVR1960" target="_blank" class="btn-versiculo azul">
-        📖 VER MÁS
-      </a>
-      <button class="btn-versiculo" style="border-left: 3px solid var(--violeta);" onclick="abrirSelectorFondo()">
-        🖼 FONDO
-      </button>
-      <button class="btn-versiculo naranja" onclick="compartirVersiculo()">
-        🔗 COMPARTIR
-      </button>
+  <div class="seccion" id="sec-versiculo">
+    <div class="card versiculo-card">
+      <div class="versiculo-bg" id="versiculo-bg"></div>
+      <div class="versiculo-overlay"></div>
+      <div class="versiculo-contenido">
+        <div class="versiculo-etiqueta">✦ PROMESA DEL DÍA</div>
+        <div class="versiculo-texto" id="versiculo-texto">Cargando palabra de vida...</div>
+        <div class="versiculo-ref" id="versiculo-ref"></div>
+      </div>
+      <div class="versiculo-btns">
+        <a href="https://www.biblegateway.com/reading-plans/verse-of-the-day/next?version=RVR1960" target="_blank" class="btn-versiculo azul">📖 VER MÁS</a>
+        <button class="btn-versiculo violeta" onclick="abrirSelectorFondo()">🖼 FONDO</button>
+        <button class="btn-versiculo naranja" onclick="compartirVersiculo()">🔗 COMPARTIR</button>
+      </div>
     </div>
   </div>
 
-  <!-- MODAL SELECTOR DE FONDO -->
+  <!-- MODAL FONDO -->
   <div class="fondo-modal" id="fondo-modal" onclick="cerrarSelectorFondo(event)">
     <div class="fondo-box">
       <div class="fondo-titulo">Elegí tu fondo</div>
@@ -489,73 +331,75 @@
     </div>
   </div>
 
-  <!-- REDES -->
-  <div class="card">
-    <div class="card-titulo">Comunidad</div>
-    <div class="redes-grid">
-      <a href="https://wa.me/5492477639867" target="_blank" class="btn-red" title="WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>WhatsApp</span>
-      </a>
-      <a href="https://www.facebook.com/estacion.victoria.777" target="_blank" class="btn-red" title="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        <span>Facebook</span>
-      </a>
-      <a href="https://www.instagram.com/siquemiglesia_pergamino/" target="_blank" class="btn-red" title="Instagram">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        <span>Instagram</span>
-      </a>
-      <a href="https://maps.google.com/?q=-33.8910754,-60.5785407" target="_blank" class="btn-red" title="Ubicación">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <span>Ubicación</span>
-      </a>
-      <button class="btn-red" onclick="document.getElementById('form-nombre').closest('.card').scrollIntoView({behavior:'smooth'})" title="Oración">
-        <svg viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3z"/></svg>
-        <span>Oración</span>
-      </button>
+  <!-- PRÉDICAS -->
+  <div class="seccion" id="sec-predicas">
+    <div class="card">
+      <div class="card-titulo">Últimas Prédicas</div>
+      <div id="predicas-lista"><p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">Cargando prédicas...</p></div>
     </div>
   </div>
 
-  <!-- PRÉDICAS -->
-  <div class="card" id="predicas">
-    <div class="card-titulo">Prédicas</div>
-    <div id="predicas-lista">
-      <p style="color:rgba(255,255,255,0.4); font-size:13px; text-align:center;">Cargando prédicas...</p>
+  <!-- PROGRAMACIÓN -->
+  <div class="seccion" id="sec-programacion">
+    <div class="card">
+      <div class="card-titulo">Programación de Radio</div>
+      <div class="prog-item">
+        <div class="prog-dia">LUNES A VIERNES</div>
+        <div class="prog-nombre-item">Mañanas en Victoria — 07:00hs a 13:00hs</div>
+      </div>
     </div>
-    <audio id="audio-predica" style="display:none"></audio>
   </div>
 
   <!-- REUNIONES -->
-  <div class="card" id="reuniones">
-    <div class="card-titulo">Días de reunión</div>
-    <div class="reunion-item">
-      <div class="reunion-dia">MIÉRCOLES</div>
-      <div class="reunion-nombre">Reunión General — 20:00hs</div>
+  <div class="seccion" id="sec-reuniones">
+    <div class="card">
+      <div class="card-titulo">Días de Reunión</div>
+      <div class="reunion-item"><div class="reunion-dia">MIÉRCOLES</div><div class="reunion-nombre">Reunión General — 20:00hs</div></div>
+      <div class="reunion-item"><div class="reunion-dia">VIERNES</div><div class="reunion-nombre">Reunión de Espiga — 20:00hs</div></div>
+      <div class="reunion-item"><div class="reunion-dia">SÁBADOS</div><div class="reunion-nombre">Preas y Adn (17:00hs) · Jóvenes (19:30hs)</div></div>
+      <div class="reunion-item"><div class="reunion-dia">DOMINGOS</div><div class="reunion-nombre">Reunión General — 10:30hs y 19:00hs</div></div>
     </div>
-    <div class="reunion-item">
-      <div class="reunion-dia">VIERNES</div>
-      <div class="reunion-nombre">Reunión de Espiga — 20:00hs</div>
-    </div>
-    <div class="reunion-item">
-      <div class="reunion-dia">SÁBADOS</div>
-      <div class="reunion-nombre">Preas y Adn (17:00hs) · Jóvenes (19:30hs)</div>
-    </div>
-    <div class="reunion-item">
-      <div class="reunion-dia">DOMINGOS</div>
-      <div class="reunion-nombre">Reunión General — 10:30hs y 19:00hs</div>
+  </div>
+
+  <!-- COMUNIDAD -->
+  <div class="seccion" id="sec-comunidad">
+    <div class="card">
+      <div class="card-titulo">Comunidad</div>
+      <div class="redes-grid">
+        <a href="https://wa.me/5492477639867" target="_blank" class="btn-red">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://www.facebook.com/estacion.victoria.777" target="_blank" class="btn-red">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/siquemiglesia_pergamino/" target="_blank" class="btn-red">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://maps.google.com/?q=-33.8910754,-60.5785407" target="_blank" class="btn-red">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          <span>Ubicación</span>
+        </a>
+        <button class="btn-red" onclick="cambiarTab('oracion', document.querySelectorAll('.tab-btn')[6])">
+          <svg viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3z"/></svg>
+          <span>Oración</span>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- ORACIÓN -->
-  <div class="card" id="oracion">
-    <div class="card-titulo">Pedido de oración</div>
-    <div class="form-grid">
-      <input type="text" class="form-input" id="form-nombre" placeholder="Nombre y Apellido" />
-      <input type="tel" class="form-input" id="form-telefono" placeholder="Teléfono (opcional)" />
-      <textarea class="form-input" id="form-pedido" placeholder="¿Cómo podemos orar por vos?"></textarea>
-      <button class="btn-enviar" onclick="enviarOracion()">
-        💬 ENVIAR POR WHATSAPP
-      </button>
+  <div class="seccion" id="sec-oracion">
+    <div class="card">
+      <div class="card-titulo">Pedido de oración</div>
+      <div class="form-grid">
+        <input type="text" class="form-input" id="form-nombre" placeholder="Nombre y Apellido" />
+        <input type="tel" class="form-input" id="form-telefono" placeholder="Teléfono (opcional)" />
+        <textarea class="form-input" id="form-pedido" placeholder="¿Cómo podemos orar por vos?"></textarea>
+        <button class="btn-enviar" onclick="enviarOracion()">💬 ENVIAR POR WHATSAPP</button>
+      </div>
     </div>
   </div>
 
@@ -565,17 +409,22 @@
   <div class="footer-nombre">Siquem Iglesia Pergamino</div>
   <div class="footer-slogan">Lugar de Refugio</div>
   <div class="footer-dir">Av. de Mayo 1168 · Pergamino, Buenos Aires</div>
-  <a href="https://play.google.com/store" target="_blank" class="footer-app">
-    📱 Descargá la app
-  </a>
+  <a href="https://play.google.com/store" target="_blank" class="footer-app">📱 Descargá la app</a>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── RADIO ─────────────────────────────────────────────────────────────────────
-let audio = null;
-let reproduciendo = false;
+// TABS
+function cambiarTab(id, btn) {
+  document.querySelectorAll('.seccion').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
+  document.getElementById('sec-' + id).classList.add('visible');
+  if (btn) btn.classList.add('activo');
+}
+
+// RADIO
+let audio = null, reproduciendo = false;
 
 function toggleRadio() {
   const btn = document.getElementById('btn-play');
@@ -585,65 +434,42 @@ function toggleRadio() {
   const status = document.getElementById('radio-status');
 
   if (reproduciendo) {
-    audio.pause();
-    audio.src = '';
-    reproduciendo = false;
-    btn.classList.remove('playing');
-    icon.style.display = 'block';
-    icon.textContent = '▶';
-    barras.classList.remove('activas');
-    status.textContent = 'PAUSADO';
-    return;
+    audio.pause(); audio.src = ''; reproduciendo = false;
+    btn.classList.remove('playing'); icon.style.display = 'block';
+    icon.textContent = '▶'; barras.classList.remove('activas');
+    status.textContent = 'PAUSADO'; return;
   }
 
-  icon.style.display = 'none';
-  spinner.style.display = 'block';
-  btn.classList.add('loading');
-
+  icon.style.display = 'none'; spinner.style.display = 'block'; btn.classList.add('loading');
   audio = new Audio('https://01.solumedia.com.ar:7786/stream');
   audio.play()
     .then(() => {
-      reproduciendo = true;
-      spinner.style.display = 'none';
-      icon.style.display = 'block';
-      icon.textContent = '⏸';
-      btn.classList.remove('loading');
-      btn.classList.add('playing');
-      barras.classList.add('activas');
-      status.textContent = 'EN VIVO';
+      reproduciendo = true; spinner.style.display = 'none';
+      icon.style.display = 'block'; icon.textContent = '⏸';
+      btn.classList.remove('loading'); btn.classList.add('playing');
+      barras.classList.add('activas'); status.textContent = 'EN VIVO';
     })
     .catch(() => {
-      spinner.style.display = 'none';
-      icon.style.display = 'block';
-      btn.classList.remove('loading');
-      mostrarToast('❌ No se pudo conectar a la radio');
+      spinner.style.display = 'none'; icon.style.display = 'block';
+      btn.classList.remove('loading'); mostrarToast('❌ No se pudo conectar a la radio');
     });
 }
 
-// ── PROGRAMA ──────────────────────────────────────────────────────────────────
+// PROGRAMA
 function checkProgramacion() {
   const ahora = new Date();
   const h = ahora.getHours() + ahora.getMinutes() / 60;
   const dia = ahora.getDay();
   const prog = { nombre: "Mañanas en Victoria", dia: [1,2,3,4,5], inicio: 7, fin: 13, txt: "Lunes a Viernes · 07:00hs a 13:00hs" };
-
   const enVivo = prog.dia.includes(dia) && h >= prog.inicio && h < prog.fin;
   const statusEl = document.getElementById('prog-status');
-  const nombreEl = document.getElementById('prog-nombre');
-  const horarioEl = document.getElementById('prog-horario');
-
-  if (enVivo) {
-    statusEl.textContent = '● EN VIVO AHORA';
-    statusEl.classList.add('en-vivo');
-  } else {
-    statusEl.textContent = 'PRÓXIMO PROGRAMA';
-    statusEl.classList.remove('en-vivo');
-  }
-  nombreEl.textContent = prog.nombre;
-  horarioEl.textContent = prog.txt;
+  statusEl.textContent = enVivo ? '● EN VIVO AHORA' : 'PRÓXIMO PROGRAMA';
+  enVivo ? statusEl.classList.add('en-vivo') : statusEl.classList.remove('en-vivo');
+  document.getElementById('prog-nombre').textContent = prog.nombre;
+  document.getElementById('prog-horario').textContent = prog.txt;
 }
 
-// ── VERSÍCULO ─────────────────────────────────────────────────────────────────
+// VERSÍCULO
 const FONDOS_COLORES = [
   'linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 60%, #1b4332 100%)',
   'linear-gradient(135deg, #0f2027 0%, #203a43 60%, #2c5364 100%)',
@@ -656,133 +482,40 @@ const FONDOS_COLORES = [
   'linear-gradient(135deg, #1a1400 0%, #4a3800 60%, #332800 100%)',
   'linear-gradient(135deg, #1a0a2a 0%, #3d1a5c 60%, #280d40 100%)',
 ];
+let fondoActual = 0;
 
 async function cargarVersiculo() {
   try {
     const r = await fetch('https://www.biblegateway.com/votd/get/?format=json&version=RVR1960');
     const d = await r.json();
     const texto = d.votd.text
-      .replace(/<[^>]*>/g, '')
-      .replace(/&ldquo;/g, '"').replace(/&rdquo;/g, '"')
-      .replace(/&lsquo;/g, "'").replace(/&rsquo;/g, "'")
-      .replace(/&#243;/g, 'ó').replace(/&#233;/g, 'é')
-      .replace(/&#225;/g, 'á').replace(/&#237;/g, 'í')
-      .replace(/&#250;/g, 'ú').replace(/&#241;/g, 'ñ')
-      .replace(/&amp;/g, '&').replace(/\[.*?\]/g, '').trim();
+      .replace(/<[^>]*>/g,'').replace(/&ldquo;/g,'"').replace(/&rdquo;/g,'"')
+      .replace(/&lsquo;/g,"'").replace(/&rsquo;/g,"'").replace(/&#243;/g,'ó')
+      .replace(/&#233;/g,'é').replace(/&#225;/g,'á').replace(/&#237;/g,'í')
+      .replace(/&#250;/g,'ú').replace(/&#241;/g,'ñ').replace(/&amp;/g,'&')
+      .replace(/\[.*?\]/g,'').replace(/[A-Z][a-z]+\.\s*\d+\.\d+\./g,'').trim();
     document.getElementById('versiculo-texto').textContent = `"${texto}"`;
     document.getElementById('versiculo-ref').textContent = d.votd.display_ref;
   } catch {
     document.getElementById('versiculo-texto').textContent = '"Jehová es mi pastor; nada me faltará."';
     document.getElementById('versiculo-ref').textContent = 'Salmo 23:1';
   }
-  const dia = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  document.getElementById('versiculo-bg').style.background = FONDOS_COLORES[dia % FONDOS_COLORES.length];
+  fondoActual = Math.floor((Date.now() - new Date(new Date().getFullYear(),0,0)) / 86400000) % FONDOS_COLORES.length;
+  document.getElementById('versiculo-bg').style.background = FONDOS_COLORES[fondoActual];
 }
 
-// ── PRÉDICAS ──────────────────────────────────────────────────────────────────
-let predicaActual = null;
-let predicaAudio = null;
-
-async function cargarPredicas() {
-  try {
-    const r = await fetch('https://raw.githubusercontent.com/Luche77/estacion-victoria-data/main/predicas.json');
-    const d = await r.json();
-    const lista = document.getElementById('predicas-lista');
-    lista.innerHTML = '';
-    d.predicas.forEach((p, i) => {
-      const item = document.createElement('div');
-      item.className = 'predica-item';
-      item.id = `predica-${i}`;
-      item.innerHTML = `
-        <div class="predica-play-btn" id="icon-${i}">▶️</div>
-        <div class="predica-info">
-          <div class="predica-titulo">${p.titulo}</div>
-          <div class="predica-detalle">${p.predicador} · ${p.fecha}</div>
-        </div>
-      `;
-      item.onclick = () => playPredica(p, i);
-      lista.appendChild(item);
-    });
-  } catch {
-    document.getElementById('predicas-lista').innerHTML =
-      '<p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">No se pudieron cargar las prédicas.</p>';
-  }
-}
-
-function playPredica(predica, idx) {
-  // Detener radio si está reproduciendo
-  if (reproduciendo) toggleRadio();
-
-  const iconEl = document.getElementById(`icon-${idx}`);
-
-  if (predicaActual === predica.audioUrl) {
-    if (predicaAudio.paused) {
-      predicaAudio.play();
-      iconEl.textContent = '⏸️';
-    } else {
-      predicaAudio.pause();
-      iconEl.textContent = '▶️';
-    }
-    return;
-  }
-
-  if (predicaAudio) { predicaAudio.pause(); }
-  document.querySelectorAll('.predica-item').forEach(el => el.classList.remove('activa'));
-  document.querySelectorAll('.predica-play-btn').forEach(el => el.textContent = '▶️');
-
-  predicaActual = predica.audioUrl;
-  iconEl.textContent = '⏳';
-  document.getElementById(`predica-${idx}`).classList.add('activa');
-
-  predicaAudio = new Audio(predica.audioUrl);
-  predicaAudio.play()
-    .then(() => { iconEl.textContent = '⏸️'; })
-    .catch(() => { iconEl.textContent = '▶️'; mostrarToast('❌ No se pudo cargar la prédica'); });
-
-  predicaAudio.onended = () => {
-    iconEl.textContent = '▶️';
-    predicaActual = null;
-    document.getElementById(`predica-${idx}`).classList.remove('activa');
-  };
-}
-
-// ── ORACIÓN ───────────────────────────────────────────────────────────────────
-function enviarOracion() {
-  const nombre = document.getElementById('form-nombre').value.trim();
-  const telefono = document.getElementById('form-telefono').value.trim();
-  const pedido = document.getElementById('form-pedido').value.trim();
-  if (!nombre || !pedido) {
-    mostrarToast('⚠️ Completá tu nombre y el pedido');
-    return;
-  }
-  const msg = `🙏 *Nuevo Pedido de Oración*\n\n*Nombre:* ${nombre}\n*Teléfono:* ${telefono || 'No indicado'}\n*Pedido:* ${pedido}`;
-  window.open(`https://wa.me/5492477639867?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-// ── TOAST ─────────────────────────────────────────────────────────────────────
-function mostrarToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('visible');
-  setTimeout(() => t.classList.remove('visible'), 3000);
-}
-
-// ── COMPARTIR VERSÍCULO ───────────────────────────────────────────────────────
 function compartirVersiculo() {
   const texto = document.getElementById('versiculo-texto').textContent;
   const ref = document.getElementById('versiculo-ref').textContent;
-  const mensaje = `${texto}\n— ${ref}\n\nEstación Victoria FM 90.7 · Siquem Iglesia Pergamino`;
+  const msg = `${texto}\n— ${ref}\n\nEstación Victoria FM 90.7 · Siquem Iglesia Pergamino`;
   if (navigator.share) {
-    navigator.share({ title: 'Promesa del Día · Estación Victoria', text: mensaje }).catch(() => {});
+    navigator.share({ title: 'Promesa del Día', text: msg }).catch(()=>{});
   } else {
-    navigator.clipboard.writeText(mensaje)
-      .then(() => mostrarToast('✅ Versículo copiado al portapapeles'))
-      .catch(() => mostrarToast('❌ No se pudo copiar'));
+    navigator.clipboard.writeText(msg)
+      .then(()=> mostrarToast('✅ Versículo copiado al portapapeles'))
+      .catch(()=> mostrarToast('❌ No se pudo copiar'));
   }
 }
-
-// ── SELECTOR DE FONDO ─────────────────────────────────────────────────────────
-let fondoActual = 0;
 
 function abrirSelectorFondo() {
   const grid = document.getElementById('fondo-grid');
@@ -790,7 +523,7 @@ function abrirSelectorFondo() {
   FONDOS_COLORES.forEach((fondo, i) => {
     const thumb = document.createElement('div');
     thumb.className = 'fondo-thumb' + (fondoActual === i ? ' seleccionado' : '');
-    thumb.style.cssText = `background: ${fondo};`;
+    thumb.style.background = fondo;
     thumb.onclick = () => elegirFondo(i);
     grid.appendChild(thumb);
   });
@@ -805,12 +538,83 @@ function elegirFondo(i) {
 }
 
 function cerrarSelectorFondo(e) {
-  if (e.target === document.getElementById('fondo-modal')) {
+  if (e.target === document.getElementById('fondo-modal'))
     document.getElementById('fondo-modal').classList.remove('visible');
+}
+
+// PRÉDICAS
+let predicaActual = null, predicaAudio = null;
+
+async function cargarPredicas() {
+  try {
+    const r = await fetch('https://raw.githubusercontent.com/Luche77/estacion-victoria-data/main/predicas.json');
+    const d = await r.json();
+    const lista = document.getElementById('predicas-lista');
+    lista.innerHTML = '';
+    window._predicas = d.predicas;
+    d.predicas.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'predica-item';
+      item.id = `predica-${i}`;
+      item.innerHTML = `
+        <div class="predica-play-btn" id="icon-${i}">▶️</div>
+        <div class="predica-info">
+          <div class="predica-titulo">${p.titulo}</div>
+          <div class="predica-detalle">${p.predicador} · ${p.fecha}</div>
+        </div>
+        <a href="${p.audioUrl}" download="${p.titulo}.mp3" class="predica-descargar" title="Descargar" onclick="event.stopPropagation()">⬇️</a>
+      `;
+      item.onclick = () => playPredica(p, i);
+      lista.appendChild(item);
+    });
+  } catch {
+    document.getElementById('predicas-lista').innerHTML =
+      '<p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">No se pudieron cargar las prédicas.</p>';
   }
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+function playPredica(predica, idx) {
+  if (reproduciendo) toggleRadio();
+  const iconEl = document.getElementById(`icon-${idx}`);
+  if (predicaActual === predica.audioUrl) {
+    if (predicaAudio.paused) { predicaAudio.play(); iconEl.textContent = '⏸️'; }
+    else { predicaAudio.pause(); iconEl.textContent = '▶️'; }
+    return;
+  }
+  if (predicaAudio) predicaAudio.pause();
+  document.querySelectorAll('.predica-item').forEach(el => el.classList.remove('activa'));
+  document.querySelectorAll('.predica-play-btn').forEach(el => el.textContent = '▶️');
+  predicaActual = predica.audioUrl;
+  iconEl.textContent = '⏳';
+  document.getElementById(`predica-${idx}`).classList.add('activa');
+  predicaAudio = new Audio(predica.audioUrl);
+  predicaAudio.play()
+    .then(() => { iconEl.textContent = '⏸️'; })
+    .catch(() => { iconEl.textContent = '▶️'; mostrarToast('❌ No se pudo cargar la prédica'); });
+  predicaAudio.onended = () => {
+    iconEl.textContent = '▶️'; predicaActual = null;
+    document.getElementById(`predica-${idx}`).classList.remove('activa');
+  };
+}
+
+// ORACIÓN
+function enviarOracion() {
+  const nombre = document.getElementById('form-nombre').value.trim();
+  const telefono = document.getElementById('form-telefono').value.trim();
+  const pedido = document.getElementById('form-pedido').value.trim();
+  if (!nombre || !pedido) { mostrarToast('⚠️ Completá tu nombre y el pedido'); return; }
+  const msg = `🙏 *Nuevo Pedido de Oración*\n\n*Nombre:* ${nombre}\n*Teléfono:* ${telefono||'No indicado'}\n*Pedido:* ${pedido}`;
+  window.open(`https://wa.me/5492477639867?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// TOAST
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('visible');
+  setTimeout(() => t.classList.remove('visible'), 3000);
+}
+
+// INIT
 checkProgramacion();
 setInterval(checkProgramacion, 30000);
 cargarVersiculo();
