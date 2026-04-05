@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estación Victoria FM 90.7 · Siquem Iglesia Pergamino</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg1: #0a0e27;
+    --bg2: #0d1b4b;
+    --azul: #38bdf8;
+    --naranja: #ff8c00;
+    --violeta: #a78bfa;
+    --blanco: #ffffff;
+    --gris: rgba(255,255,255,0.5);
+    --card: rgba(13,27,75,0.7);
+    --border: rgba(56,189,248,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg1) 100%);
+    background-attachment: fixed;
+    color: var(--blanco);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ESTRELLAS */
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(56,189,248,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 20%, rgba(56,189,248,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, rgba(56,189,248,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 50%, rgba(167,139,250,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,14,39,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+
+  .header-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .logo-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg2), #1e3a6e);
+    border: 2px solid var(--azul);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .logo-text h1 { font-size: 16px; font-weight: 700; color: var(--blanco); }
+  .logo-text p { font-size: 11px; color: var(--azul); font-weight: 500; }
+
+  nav { display: flex; gap: 6px; flex-wrap: wrap; }
+  nav a {
+    color: var(--gris); text-decoration: none; font-size: 12px; font-weight: 600;
+    padding: 6px 12px; border-radius: 20px; transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+  nav a:hover { color: var(--azul); border-color: var(--border); background: rgba(56,189,248,0.08); }
+
+  /* MAIN */
+  main {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 32px 20px 60px;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+
+  /* CARD BASE */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+
+  .card-titulo {
+    font-size: 11px; font-weight: 700; color: var(--azul);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-titulo::before {
+    content: ''; width: 3px; height: 14px; background: var(--azul); border-radius: 2px;
+  }
+
+  /* REPRODUCTOR */
+  .player-card { border-color: rgba(56,189,248,0.35); }
+
+  .player-inner {
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  #btn-play {
+    width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, #1e2a4a, #0d1b4b);
+    border: 2px solid rgba(56,189,248,0.4);
+    color: white; font-size: 26px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  #btn-play:hover { border-color: var(--azul); transform: scale(1.05); }
+  #btn-play.playing { border-color: var(--naranja); }
+  #btn-play.loading { pointer-events: none; }
+
+  .spinner {
+    display: none; width: 28px; height: 28px;
+    border: 3px solid rgba(255,140,0,0.2);
+    border-top-color: var(--naranja);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .play-icon { transition: opacity 0.2s; }
+
+  .player-info { flex: 1; min-width: 160px; }
+
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--blanco); margin-bottom: 6px;
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #ef4444;
+    animation: pulse-dot 1.5s ease infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .player-nombre { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .player-freq { font-size: 13px; color: var(--azul); font-weight: 500; }
+
+  /* BARRAS */
+  .barras {
+    display: flex; align-items: flex-end; gap: 3px; height: 28px;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .barras.activas { opacity: 1; }
+  .barra {
+    width: 4px; background: var(--naranja); border-radius: 2px;
+    animation: barra-anim 0.8s ease infinite alternate;
+  }
+  .barra:nth-child(1) { animation-duration: 0.6s; }
+  .barra:nth-child(2) { animation-duration: 0.8s; animation-delay: 0.1s; }
+  .barra:nth-child(3) { animation-duration: 0.5s; animation-delay: 0.2s; }
+  .barra:nth-child(4) { animation-duration: 0.9s; animation-delay: 0.05s; }
+  .barra:nth-child(5) { animation-duration: 0.7s; animation-delay: 0.15s; }
+  @keyframes barra-anim {
+    from { height: 4px; }
+    to { height: 22px; }
+  }
+
+  /* PROGRAMA EN VIVO */
+  .prog-card { }
+  .prog-status {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gris); margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .prog-status.en-vivo { color: var(--azul); }
+  .prog-nombre { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .prog-horario { font-size: 13px; color: var(--azul); font-weight: 500; }
+
+  /* VERSÍCULO */
+  .versiculo-card {
+    position: relative; overflow: hidden; min-height: 240px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0; border: none;
+  }
+  .versiculo-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a3a2a, #0d2137);
+    background-size: cover; background-position: center;
+    transition: background 0.5s;
+  }
+  .versiculo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%);
+  }
+  .versiculo-contenido {
+    position: relative; z-index: 1;
+    padding: 28px 28px 20px;
+  }
+  .versiculo-etiqueta {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: rgba(255,255,255,0.6); margin-bottom: 10px;
+  }
+  .versiculo-texto {
+    font-size: 16px; font-style: italic; font-weight: 400;
+    line-height: 1.7; color: #fff; margin-bottom: 10px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .versiculo-ref {
+    font-size: 13px; font-weight: 700; color: #fff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .versiculo-btns {
+    position: relative; z-index: 1;
+    display: flex; gap: 8px; padding: 0 28px 20px;
+  }
+  .btn-versiculo {
+    flex: 1; padding: 9px; border-radius: 10px; cursor: pointer;
+    font-family: 'Cairo', sans-serif; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    background: rgba(10,14,39,0.85); color: #fff;
+    border: 1px solid rgba(56,189,248,0.3);
+    transition: all 0.2s; text-decoration: none;
+  }
+  .btn-versiculo:hover { background: rgba(56,189,248,0.15); }
+  .btn-versiculo.azul { border-left: 3px solid var(--azul); }
+  .btn-versiculo.naranja { border-left: 3px solid var(--naranja); }
+
+  /* REDES */
+  .redes-grid {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+  .btn-red {
+    width: 58px; height: 58px; border-radius: 50%;
+    background: rgba(13,27,75,0.9);
+    border: 2px solid rgba(56,189,248,0.4);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white; text-decoration: none; font-size: 22px;
+    transition: all 0.2s; gap: 2px;
+  }
+  .btn-red:hover { border-color: var(--azul); transform: translateY(-3px); background: rgba(56,189,248,0.1); }
+  .btn-red span { font-size: 9px; font-weight: 600; font-family: 'Cairo', sans-serif; }
+
+  /* REUNIONES */
+  .reunion-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(56,189,248,0.1);
+  }
+  .reunion-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .reunion-dia { font-size: 10px; font-weight: 700; color: var(--azul); letter-spacing: 1px; margin-bottom: 3px; }
+  .reunion-nombre { font-size: 14px; font-weight: 500; color: var(--blanco); }
+
+  /* PRÉDICAS */
+  .predica-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(56,189,248,0.1);
+    cursor: pointer; transition: background 0.2s; border-radius: 10px;
+  }
+  .predica-item:last-child { border-bottom: none; }
+  .predica-item:hover { background: rgba(56,189,248,0.05); padding-left: 8px; }
+  .predica-item.activa { background: rgba(56,189,248,0.1); padding-left: 8px; }
+
+  .predica-play-btn {
+    width: 42px; height: 42px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: var(--azul); transition: transform 0.2s;
+  }
+  .predica-item:hover .predica-play-btn { transform: scale(1.1); }
+
+  .predica-info { flex: 1; min-width: 0; }
+  .predica-titulo { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .predica-detalle { font-size: 12px; color: var(--azul); margin-top: 2px; }
+
+  .predica-loading { display: none; }
+  .predica-loading.visible { display: block; }
+
+  /* FORMULARIO */
+  .form-grid { display: flex; flex-direction: column; gap: 12px; }
+  .form-input {
+    background: rgba(10,14,39,0.8); color: white;
+    border: 1px solid rgba(56,189,248,0.3); border-radius: 12px;
+    padding: 12px 16px; font-family: 'Cairo', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-input:focus { border-color: var(--azul); }
+  textarea.form-input { height: 100px; resize: vertical; }
+
+  .btn-enviar {
+    background: var(--naranja); color: #000;
+    border: none; border-radius: 12px; padding: 14px;
+    font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-enviar:hover { background: #ffaa33; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 40px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-nombre { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .footer-slogan { font-size: 15px; color: var(--azul); margin-bottom: 6px; }
+  .footer-dir { font-size: 13px; color: var(--gris); margin-bottom: 16px; }
+  .footer-app {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(56,189,248,0.1); border: 1px solid var(--border);
+    border-radius: 20px; padding: 8px 18px;
+    color: var(--azul); font-size: 12px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-app:hover { background: rgba(56,189,248,0.2); }
+
+  /* ACCORDION */
+  .accordion-btn {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    color: white; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 700;
+    padding: 0; transition: color 0.2s;
+  }
+  .accordion-btn:hover { color: var(--azul); }
+  .accordion-icon { font-size: 18px; transition: transform 0.3s; color: var(--azul); }
+  .accordion-content { overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
+  .accordion-content.open { max-height: 600px; }
+  .accordion-inner { padding-top: 16px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: rgba(13,27,75,0.95); border: 1px solid var(--azul);
+    color: white; padding: 12px 24px; border-radius: 20px;
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 600;
+    transition: transform 0.3s; z-index: 999;
+  }
+  .toast.visible { transform: translateX(-50%) translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    header { padding: 10px 16px; }
+    nav { display: none; }
+    main { padding: 20px 14px 50px; gap: 16px; }
+    .card { padding: 18px; }
+    .versiculo-contenido { padding: 20px 20px 14px; }
+    .versiculo-btns { padding: 0 20px 16px; }
+    .player-nombre { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<header>
+  <div class="header-logo">
+    <div class="logo-circle">📻</div>
+    <div class="logo-text">
+      <h1>Estación Victoria</h1>
+      <p>FM 90.7 · Siquem Iglesia Pergamino</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#radio">Radio</a>
+    <a href="#versiculo">Versículo</a>
+    <a href="#predicas">Prédicas</a>
+    <a href="#reuniones">Reuniones</a>
+    <a href="#oracion">Oración</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- REPRODUCTOR -->
+  <div class="card player-card" id="radio">
+    <div class="card-titulo">Radio en vivo</div>
+    <div class="player-inner">
+      <button id="btn-play" onclick="toggleRadio()">
+        <span class="play-icon" id="play-icon">▶</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+      <div class="player-info">
+        <div class="live-badge">
+          <div class="live-dot"></div>
+          <span id="radio-status">EN VIVO</span>
+        </div>
+        <div class="player-nombre">Estación Victoria FM 90.7</div>
+        <div class="player-freq">Siquem Iglesia · Pergamino</div>
+      </div>
+      <div class="barras" id="barras">
+        <div class="barra" style="height:8px"></div>
+        <div class="barra" style="height:16px"></div>
+        <div class="barra" style="height:22px"></div>
+        <div class="barra" style="height:14px"></div>
+        <div class="barra" style="height:8px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMA -->
+  <div class="card prog-card" id="prog-card">
+    <div class="prog-status" id="prog-status">PRÓXIMO PROGRAMA</div>
+    <div class="prog-nombre" id="prog-nombre">Mañanas en Victoria</div>
+    <div class="prog-horario" id="prog-horario">Lunes a Viernes 07:00hs</div>
+  </div>
+
+  <!-- VERSÍCULO -->
+  <div class="card versiculo-card" id="versiculo">
+    <div class="versiculo-bg" id="versiculo-bg"></div>
+    <div class="versiculo-overlay"></div>
+    <div class="versiculo-contenido">
+      <div class="versiculo-etiqueta">✦ PROMESA DEL DÍA</div>
+      <div class="versiculo-texto" id="versiculo-texto">Cargando palabra de vida...</div>
+      <div class="versiculo-ref" id="versiculo-ref"></div>
+    </div>
+    <div class="versiculo-btns">
+      <a href="https://www.biblegateway.com/reading-plans/verse-of-the-day/next?version=RVR1960" target="_blank" class="btn-versiculo azul">
+        📖 VER MÁS
+      </a>
+    </div>
+  </div>
+
+  <!-- REDES -->
+  <div class="card">
+    <div class="card-titulo">Comunidad</div>
+    <div class="redes-grid">
+      <a href="https://wa.me/5492477639867" target="_blank" class="btn-red" title="WhatsApp">
+        <span>💬</span><span>WhatsApp</span>
+      </a>
+      <a href="https://www.facebook.com/estacion.victoria.777" target="_blank" class="btn-red" title="Facebook">
+        <span>📘</span><span>Facebook</span>
+      </a>
+      <a href="https://www.instagram.com/siquemiglesia_pergamino/" target="_blank" class="btn-red" title="Instagram">
+        <span>📸</span><span>Instagram</span>
+      </a>
+      <a href="https://maps.google.com/?q=-33.8910754,-60.5785407" target="_blank" class="btn-red" title="Ubicación">
+        <span>📍</span><span>Cómo llegar</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PRÉDICAS -->
+  <div class="card" id="predicas">
+    <div class="card-titulo">Prédicas</div>
+    <div id="predicas-lista">
+      <p style="color:rgba(255,255,255,0.4); font-size:13px; text-align:center;">Cargando prédicas...</p>
+    </div>
+    <audio id="audio-predica" style="display:none"></audio>
+  </div>
+
+  <!-- REUNIONES -->
+  <div class="card" id="reuniones">
+    <div class="card-titulo">Días de reunión</div>
+    <div class="reunion-item">
+      <div class="reunion-dia">MIÉRCOLES</div>
+      <div class="reunion-nombre">Reunión General — 20:00hs</div>
+    </div>
+    <div class="reunion-item">
+      <div class="reunion-dia">VIERNES</div>
+      <div class="reunion-nombre">Reunión de Espiga — 20:00hs</div>
+    </div>
+    <div class="reunion-item">
+      <div class="reunion-dia">SÁBADOS</div>
+      <div class="reunion-nombre">Preas y Adn (17:00hs) · Jóvenes (19:30hs)</div>
+    </div>
+    <div class="reunion-item">
+      <div class="reunion-dia">DOMINGOS</div>
+      <div class="reunion-nombre">Reunión General — 10:30hs y 19:00hs</div>
+    </div>
+  </div>
+
+  <!-- ORACIÓN -->
+  <div class="card" id="oracion">
+    <div class="card-titulo">Pedido de oración</div>
+    <div class="form-grid">
+      <input type="text" class="form-input" id="form-nombre" placeholder="Nombre y Apellido" />
+      <input type="tel" class="form-input" id="form-telefono" placeholder="Teléfono (opcional)" />
+      <textarea class="form-input" id="form-pedido" placeholder="¿Cómo podemos orar por vos?"></textarea>
+      <button class="btn-enviar" onclick="enviarOracion()">
+        💬 ENVIAR POR WHATSAPP
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-nombre">Siquem Iglesia Pergamino</div>
+  <div class="footer-slogan">Lugar de Refugio</div>
+  <div class="footer-dir">Av. de Mayo 1168 · Pergamino, Buenos Aires</div>
+  <a href="https://play.google.com/store" target="_blank" class="footer-app">
+    📱 Descargá la app
+  </a>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── RADIO ─────────────────────────────────────────────────────────────────────
+let audio = null;
+let reproduciendo = false;
+
+function toggleRadio() {
+  const btn = document.getElementById('btn-play');
+  const icon = document.getElementById('play-icon');
+  const spinner = document.getElementById('spinner');
+  const barras = document.getElementById('barras');
+  const status = document.getElementById('radio-status');
+
+  if (reproduciendo) {
+    audio.pause();
+    audio.src = '';
+    reproduciendo = false;
+    btn.classList.remove('playing');
+    icon.style.display = 'block';
+    icon.textContent = '▶';
+    barras.classList.remove('activas');
+    status.textContent = 'PAUSADO';
+    return;
+  }
+
+  icon.style.display = 'none';
+  spinner.style.display = 'block';
+  btn.classList.add('loading');
+
+  audio = new Audio('https://01.solumedia.com.ar:7786/stream');
+  audio.play()
+    .then(() => {
+      reproduciendo = true;
+      spinner.style.display = 'none';
+      icon.style.display = 'block';
+      icon.textContent = '⏸';
+      btn.classList.remove('loading');
+      btn.classList.add('playing');
+      barras.classList.add('activas');
+      status.textContent = 'EN VIVO';
+    })
+    .catch(() => {
+      spinner.style.display = 'none';
+      icon.style.display = 'block';
+      btn.classList.remove('loading');
+      mostrarToast('❌ No se pudo conectar a la radio');
+    });
+}
+
+// ── PROGRAMA ──────────────────────────────────────────────────────────────────
+function checkProgramacion() {
+  const ahora = new Date();
+  const h = ahora.getHours() + ahora.getMinutes() / 60;
+  const dia = ahora.getDay();
+  const prog = { nombre: "Mañanas en Victoria", dia: [1,2,3,4,5], inicio: 7, fin: 13, txt: "Lunes a Viernes · 07:00hs a 13:00hs" };
+
+  const enVivo = prog.dia.includes(dia) && h >= prog.inicio && h < prog.fin;
+  const statusEl = document.getElementById('prog-status');
+  const nombreEl = document.getElementById('prog-nombre');
+  const horarioEl = document.getElementById('prog-horario');
+
+  if (enVivo) {
+    statusEl.textContent = '● EN VIVO AHORA';
+    statusEl.classList.add('en-vivo');
+  } else {
+    statusEl.textContent = 'PRÓXIMO PROGRAMA';
+    statusEl.classList.remove('en-vivo');
+  }
+  nombreEl.textContent = prog.nombre;
+  horarioEl.textContent = prog.txt;
+}
+
+// ── VERSÍCULO ─────────────────────────────────────────────────────────────────
+const FONDOS_COLORES = [
+  'linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 60%, #1b4332 100%)',
+  'linear-gradient(135deg, #0f2027 0%, #203a43 60%, #2c5364 100%)',
+  'linear-gradient(135deg, #2d1b4e 0%, #4a1d6e 60%, #1a0533 100%)',
+  'linear-gradient(135deg, #3d1c00 0%, #7a3500 60%, #5c2500 100%)',
+  'linear-gradient(135deg, #0a1628 0%, #1e3a5f 60%, #0d2137 100%)',
+  'linear-gradient(135deg, #1a2a1a 0%, #2f4f2f 60%, #1c3a1c 100%)',
+  'linear-gradient(135deg, #2a0a0a 0%, #5c1a1a 60%, #3d0f0f 100%)',
+  'linear-gradient(135deg, #0a2a2a 0%, #1a5c5c 60%, #0f3d3d 100%)',
+  'linear-gradient(135deg, #1a1400 0%, #4a3800 60%, #332800 100%)',
+  'linear-gradient(135deg, #1a0a2a 0%, #3d1a5c 60%, #280d40 100%)',
+];
+
+async function cargarVersiculo() {
+  try {
+    const r = await fetch('https://www.biblegateway.com/votd/get/?format=json&version=RVR1960');
+    const d = await r.json();
+    const texto = d.votd.text
+      .replace(/<[^>]*>/g, '')
+      .replace(/&ldquo;/g, '"').replace(/&rdquo;/g, '"')
+      .replace(/&lsquo;/g, "'").replace(/&rsquo;/g, "'")
+      .replace(/&#243;/g, 'ó').replace(/&#233;/g, 'é')
+      .replace(/&#225;/g, 'á').replace(/&#237;/g, 'í')
+      .replace(/&#250;/g, 'ú').replace(/&#241;/g, 'ñ')
+      .replace(/&amp;/g, '&').replace(/\[.*?\]/g, '').trim();
+    document.getElementById('versiculo-texto').textContent = `"${texto}"`;
+    document.getElementById('versiculo-ref').textContent = d.votd.display_ref;
+  } catch {
+    document.getElementById('versiculo-texto').textContent = '"Jehová es mi pastor; nada me faltará."';
+    document.getElementById('versiculo-ref').textContent = 'Salmo 23:1';
+  }
+  const dia = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  document.getElementById('versiculo-bg').style.background = FONDOS_COLORES[dia % FONDOS_COLORES.length];
+}
+
+// ── PRÉDICAS ──────────────────────────────────────────────────────────────────
+let predicaActual = null;
+let predicaAudio = null;
+
+async function cargarPredicas() {
+  try {
+    const r = await fetch('https://raw.githubusercontent.com/Luche77/estacion-victoria-data/main/predicas.json');
+    const d = await r.json();
+    const lista = document.getElementById('predicas-lista');
+    lista.innerHTML = '';
+    d.predicas.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'predica-item';
+      item.id = `predica-${i}`;
+      item.innerHTML = `
+        <div class="predica-play-btn" id="icon-${i}">▶️</div>
+        <div class="predica-info">
+          <div class="predica-titulo">${p.titulo}</div>
+          <div class="predica-detalle">${p.predicador} · ${p.fecha}</div>
+        </div>
+      `;
+      item.onclick = () => playPredica(p, i);
+      lista.appendChild(item);
+    });
+  } catch {
+    document.getElementById('predicas-lista').innerHTML =
+      '<p style="color:rgba(255,255,255,0.4);font-size:13px;text-align:center;">No se pudieron cargar las prédicas.</p>';
+  }
+}
+
+function playPredica(predica, idx) {
+  // Detener radio si está reproduciendo
+  if (reproduciendo) toggleRadio();
+
+  const iconEl = document.getElementById(`icon-${idx}`);
+
+  if (predicaActual === predica.audioUrl) {
+    if (predicaAudio.paused) {
+      predicaAudio.play();
+      iconEl.textContent = '⏸️';
+    } else {
+      predicaAudio.pause();
+      iconEl.textContent = '▶️';
+    }
+    return;
+  }
+
+  if (predicaAudio) { predicaAudio.pause(); }
+  document.querySelectorAll('.predica-item').forEach(el => el.classList.remove('activa'));
+  document.querySelectorAll('.predica-play-btn').forEach(el => el.textContent = '▶️');
+
+  predicaActual = predica.audioUrl;
+  iconEl.textContent = '⏳';
+  document.getElementById(`predica-${idx}`).classList.add('activa');
+
+  predicaAudio = new Audio(predica.audioUrl);
+  predicaAudio.play()
+    .then(() => { iconEl.textContent = '⏸️'; })
+    .catch(() => { iconEl.textContent = '▶️'; mostrarToast('❌ No se pudo cargar la prédica'); });
+
+  predicaAudio.onended = () => {
+    iconEl.textContent = '▶️';
+    predicaActual = null;
+    document.getElementById(`predica-${idx}`).classList.remove('activa');
+  };
+}
+
+// ── ORACIÓN ───────────────────────────────────────────────────────────────────
+function enviarOracion() {
+  const nombre = document.getElementById('form-nombre').value.trim();
+  const telefono = document.getElementById('form-telefono').value.trim();
+  const pedido = document.getElementById('form-pedido').value.trim();
+  if (!nombre || !pedido) {
+    mostrarToast('⚠️ Completá tu nombre y el pedido');
+    return;
+  }
+  const msg = `🙏 *Nuevo Pedido de Oración*\n\n*Nombre:* ${nombre}\n*Teléfono:* ${telefono || 'No indicado'}\n*Pedido:* ${pedido}`;
+  window.open(`https://wa.me/5492477639867?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visible');
+  setTimeout(() => t.classList.remove('visible'), 3000);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+checkProgramacion();
+setInterval(checkProgramacion, 30000);
+cargarVersiculo();
+cargarPredicas();
+</script>
+</body>
+</html>
