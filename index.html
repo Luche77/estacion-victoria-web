@@ -442,6 +442,9 @@
       <a href="https://www.biblegateway.com/reading-plans/verse-of-the-day/next?version=RVR1960" target="_blank" class="btn-versiculo azul">
         📖 VER MÁS
       </a>
+      <button class="btn-versiculo naranja" onclick="compartirVersiculo()">
+        🔗 COMPARTIR
+      </button>
     </div>
   </div>
 
@@ -713,6 +716,24 @@ function mostrarToast(msg) {
   t.textContent = msg;
   t.classList.add('visible');
   setTimeout(() => t.classList.remove('visible'), 3000);
+}
+
+// ── COMPARTIR VERSÍCULO ───────────────────────────────────────────────────────
+function compartirVersiculo() {
+  const texto = document.getElementById('versiculo-texto').textContent;
+  const ref = document.getElementById('versiculo-ref').textContent;
+  const mensaje = `${texto}\n— ${ref}\n\nEstación Victoria FM 90.7 · Siquem Iglesia Pergamino`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Promesa del Día · Estación Victoria',
+      text: mensaje,
+    }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(mensaje)
+      .then(() => mostrarToast('✅ Versículo copiado al portapapeles'))
+      .catch(() => mostrarToast('❌ No se pudo copiar'));
+  }
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
