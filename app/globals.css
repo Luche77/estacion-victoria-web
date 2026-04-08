@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Radio Victoria Theme - Deep Blue & Gold/Orange accents */
+  --background: oklch(0.08 0.02 250);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.12 0.025 250);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.10 0.02 250);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.75 0.15 230);
+  --primary-foreground: oklch(0.08 0.02 250);
+  --secondary: oklch(0.18 0.03 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.15 0.02 250);
+  --muted-foreground: oklch(0.65 0.02 250);
+  --accent: oklch(0.70 0.18 55);
+  --accent-foreground: oklch(0.08 0.02 250);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.04 250);
+  --input: oklch(0.15 0.025 250);
+  --ring: oklch(0.75 0.15 230);
+  --chart-1: oklch(0.75 0.15 230);
+  --chart-2: oklch(0.70 0.18 55);
+  --chart-3: oklch(0.65 0.12 200);
+  --chart-4: oklch(0.80 0.15 80);
+  --chart-5: oklch(0.60 0.15 300);
+  --radius: 0.75rem;
+  
+  /* Custom colors for radio */
+  --live: oklch(0.65 0.25 25);
+  --live-glow: oklch(0.70 0.18 55);
+}
+
+@theme inline {
+  --font-sans: 'Cairo', 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-live: var(--live);
+  --color-live-glow: var(--live-glow);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Radio Player Animations */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4), 0 0 40px rgba(255, 140, 0, 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(255, 140, 0, 0.6), 0 0 60px rgba(255, 140, 0, 0.3);
+  }
+}
+
+@keyframes bar-animate {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.bar-1 { animation: bar-animate 0.4s ease-in-out infinite; }
+.bar-2 { animation: bar-animate 0.4s ease-in-out infinite 0.1s; }
+.bar-3 { animation: bar-animate 0.4s ease-in-out infinite 0.2s; }
+.bar-4 { animation: bar-animate 0.4s ease-in-out infinite 0.15s; }
+.bar-5 { animation: bar-animate 0.4s ease-in-out infinite 0.05s; }
+
+/* Live indicator pulse */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-live-pulse {
+  animation: live-pulse 1.5s ease-in-out infinite;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-radio {
+  background: linear-gradient(180deg, 
+    oklch(0.08 0.02 250) 0%, 
+    oklch(0.12 0.03 250) 50%, 
+    oklch(0.08 0.02 250) 100%
+  );
+}
+
+/* Glass effect cards */
+.glass-card {
+  background: linear-gradient(135deg, 
+    rgba(13, 27, 75, 0.6) 0%, 
+    rgba(10, 14, 39, 0.8) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.10 0.02 250);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.04 250);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.35 0.05 250);
+}
+
+/* Safe area for mobile bottom nav */
+.h-safe-area-inset-bottom {
+  height: env(safe-area-inset-bottom, 0px);
+}
