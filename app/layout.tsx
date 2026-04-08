@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Cairo, Geist_Mono } from 'next/font/google'
+import { Cairo } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -8,7 +8,6 @@ const cairo = Cairo({
   variable: '--font-cairo',
   weight: ['400', '500', '600', '700']
 });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Estación Victoria FM 90.7 | Siquem Iglesia Pergamino',
