@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estación Victoria FM 90.7 | Siquem Iglesia Pergamino</title>
+<meta name="description" content="Radio cristiana de Siquem Iglesia Pergamino. Escuchá prédicas, versículo del día y enviá pedidos de oración. Lugar de Refugio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #060d24;
+  --navy2: #0c1640;
+  --navy3: #121f52;
+  --gold: #c9943a;
+  --gold2: #e8b45a;
+  --gold-light: #f5d28a;
+  --blue: #2960c8;
+  --blue2: #3b7de8;
+  --white: #f8f4ee;
+  --white2: rgba(248,244,238,0.7);
+  --white3: rgba(248,244,238,0.35);
+  --white4: rgba(248,244,238,0.1);
+  --white5: rgba(248,244,238,0.05);
+  --border: rgba(201,148,58,0.2);
+  --border2: rgba(248,244,238,0.1);
+  --radius: 14px;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--navy); color: var(--white); overflow-x: hidden; }
+
+/* ── TOPBAR ── */
+.topbar { background: rgba(6,13,36,0.95); border-bottom: 1px solid var(--border); padding: 8px 2rem; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--white3); }
+.topbar a { color: var(--white3); text-decoration: none; }
+.topbar .socials { display: flex; gap: 1rem; }
+.topbar .socials a:hover { color: var(--gold2); }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(6,13,36,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border2); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), var(--gold2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.nav-logo-text { font-family: var(--font-display); font-size: 17px; color: var(--white); line-height: 1.2; }
+.nav-logo-text span { color: var(--gold2); display: block; font-size: 11px; font-family: var(--font-body); font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a { display: block; padding: 0 1.1rem; height: 64px; line-height: 64px; font-size: 13px; font-weight: 400; color: var(--white2); text-decoration: none; letter-spacing: 0.5px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.nav-links a:hover { color: var(--gold2); border-bottom-color: var(--gold); }
+.nav-cta { background: var(--gold); color: var(--navy) !important; padding: 8px 18px !important; height: auto !important; line-height: 1 !important; border-radius: 8px; font-weight: 600 !important; border-bottom: none !important; font-size: 12px !important; }
+.nav-cta:hover { background: var(--gold2) !important; color: var(--navy) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+/* ── HERO ── */
+.hero { min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem 3rem; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, #162050 0%, var(--navy) 70%); }
+.hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,148,58,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,148,58,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+.hero-glow { position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; background: radial-gradient(ellipse, rgba(41,96,200,0.18) 0%, transparent 70%); pointer-events: none; }
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.live-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 2rem; }
+.live-dot { width: 7px; height: 7px; background: #ef4444; border-radius: 50%; animation: livepulse 1.5s ease-in-out infinite; flex-shrink: 0; }
+@keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+.hero h1 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 64px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 0.5rem; }
+.hero h1 em { color: var(--gold2); font-style: normal; }
+.hero-freq { font-family: var(--font-body); font-size: clamp(13px, 2vw, 16px); font-weight: 300; letter-spacing: 4px; color: var(--white3); text-transform: uppercase; margin-bottom: 1rem; }
+.hero-sub { font-size: 16px; color: var(--white2); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.6; }
+
+/* ── PLAYER ── */
+.player-wrap { width: 100%; max-width: 480px; margin: 0 auto 2.5rem; }
+.player-card { background: rgba(12,22,64,0.8); border: 1px solid var(--border); border-radius: 20px; padding: 1.5rem; backdrop-filter: blur(20px); }
+.player-top { display: flex; align-items: center; gap: 14px; margin-bottom: 1.25rem; }
+.player-art { width: 60px; height: 60px; background: linear-gradient(135deg, #1a3080, #2960c8); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; position: relative; overflow: hidden; }
+.player-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,148,58,0.2), transparent); }
+.player-meta { flex: 1; text-align: left; }
+.player-meta .label { font-size: 11px; color: var(--white3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+.player-meta .station { font-family: var(--font-display); font-size: 16px; color: var(--white); font-weight: 500; }
+.player-meta .church { font-size: 12px; color: var(--white3); margin-top: 2px; }
+.eq-bars { display: flex; align-items: flex-end; gap: 3px; height: 22px; }
+.eq-bar { width: 3px; border-radius: 2px; background: var(--gold2); transition: height 0.1s; }
+.eq-bar:nth-child(1){animation:eq 0.6s ease-in-out infinite}
+.eq-bar:nth-child(2){animation:eq 0.6s ease-in-out infinite 0.12s}
+.eq-bar:nth-child(3){animation:eq 0.6s ease-in-out infinite 0.22s}
+.eq-bar:nth-child(4){animation:eq 0.6s ease-in-out infinite 0.18s}
+.eq-bar:nth-child(5){animation:eq 0.6s ease-in-out infinite 0.08s}
+@keyframes eq { 0%,100%{height:30%} 50%{height:100%} }
+.player-bottom { display: flex; align-items: center; gap: 12px; }
+.vol-ctrl { display: flex; align-items: center; gap: 8px; flex: 1; }
+.vol-ctrl span { font-size: 14px; }
+.vol-ctrl input[type=range] { flex: 1; accent-color: var(--gold2); cursor: pointer; height: 4px; }
+.play-btn { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold2)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--navy); flex-shrink: 0; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 20px rgba(201,148,58,0.35); }
+.play-btn:hover { transform: scale(1.06); box-shadow: 0 6px 28px rgba(201,148,58,0.5); }
+.share-btn { background: var(--white5); border: 1px solid var(--border2); color: var(--white2); font-size: 12px; font-family: var(--font-body); padding: 8px 14px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.2s; }
+.share-btn:hover { background: var(--white4); }
+.stream-note { font-size: 12px; color: var(--white3); margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.stream-note a { color: var(--gold2); text-decoration: none; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.btn-primary { background: var(--gold); color: var(--navy); border: none; padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 600; font-family: var(--font-body); cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
+.btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--white2); border: 1px solid var(--border2); padding: 12px 28px; border-radius: 10px; font-size: 14px; font-family: var(--font-body); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold2); }
+
+/* ── SCROLL INDICATOR ── */
+.scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--white3); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+.scroll-arrow { font-size: 16px; }
+
+/* ── SECTIONS SHARED ── */
+.section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-full { padding: 5rem 2rem; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-tag { display: inline-block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold2); font-weight: 500; margin-bottom: 0.75rem; }
+.section-tag::before, .section-tag::after { content: '—'; margin: 0 8px; opacity: 0.5; }
+.section-title { font-family: var(--font-display); font-size: clamp(26px, 4vw, 40px); font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+.section-sub { color: var(--white2); font-size: 16px; font-weight: 300; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 2rem; }
+
+/* ── VERSE ── */
+.verse-section { background: linear-gradient(180deg, var(--navy) 0%, #0d1640 50%, var(--navy) 100%); }
+.verse-card { max-width: 700px; margin: 0 auto; text-align: center; position: relative; padding: 3rem 2.5rem; background: var(--white5); border: 1px solid var(--border); border-radius: 20px; }
+.verse-icon { font-size: 36px; margin-bottom: 1.5rem; opacity: 0.8; }
+.verse-text { font-family: var(--font-display); font-size: clamp(18px, 3vw, 24px); font-weight: 400; color: var(--white); line-height: 1.7; font-style: italic; margin-bottom: 1.5rem; }
+.verse-ref { font-size: 13px; color: var(--gold2); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; }
+.verse-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.verse-btn { background: transparent; border: 1px solid var(--border); color: var(--white2); padding: 8px 18px; border-radius: 8px; font-size: 12px; font-family: var(--font-body); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+.verse-btn:hover { border-color: var(--gold); color: var(--gold2); }
+
+/* ── HORARIOS ── */
+.schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+.schedule-card { background: var(--white5); border: 1px solid var(--border2); border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.2s; }
+.schedule-card:hover { border-color: var(--border); }
+.schedule-card .day { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); margin-bottom: 0.5rem; font-weight: 500; }
+.schedule-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--white); margin-bottom: 1rem; }
+.schedule-times { display: flex; flex-direction: column; gap: 6px; }
+.time-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--white2); }
+.time-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.schedule-address { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border2); font-size: 12px; color: var(--white3); display: flex; align-items: center; gap: 6px; }
+
+/* ── PREDICAS ── */
+.predicas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+.predica-card { background: var(--white5); border: 1px solid var(--border2); border-radius: var(--radius); padding: 1.25rem; cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
+.predica-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.predica-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.predica-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold2); background: rgba(201,148,58,0.1); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+.predica-play { width: 32px; height: 32px; border-radius: 50%; background: rgba(41,96,200,0.2); border: 1px solid rgba(41,96,200,0.3); color: var(--blue2); display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; transition: background 0.2s; }
+.predica-play:hover { background: rgba(41,96,200,0.35); }
+.predica-card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 4px; line-height: 1.4; }
+.predica-card .pastor { font-size: 12px; color: var(--white3); margin-bottom: 0.75rem; }
+.predica-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 0.75rem; border-top: 1px solid var(--border2); }
+.predica-dur { font-size: 12px; color: var(--white3); display: flex; align-items: center; gap: 4px; }
+.predica-share { background: none; border: none; color: var(--white3); font-size: 14px; cursor: pointer; padding: 2px; transition: color 0.2s; }
+.predica-share:hover { color: var(--gold2); }
+
+/* ── TESTIMONIOS ── */
+.testimonios-section { background: linear-gradient(180deg, var(--navy) 0%, #0d1640 50%, var(--navy) 100%); }
+.testimonios-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+.testimonio-card { background: var(--white5); border: 1px solid var(--border2); border-radius: var(--radius); padding: 1.5rem; }
+.testimonio-quote { font-size: 32px; color: var(--gold); line-height: 1; margin-bottom: 0.75rem; font-family: var(--font-display); }
+.testimonio-text { font-size: 14px; color: var(--white2); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+.testimonio-author { display: flex; align-items: center; gap: 10px; }
+.testimonio-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--navy3), var(--blue)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: var(--gold2); border: 1px solid var(--border); flex-shrink: 0; }
+.testimonio-name { font-size: 13px; font-weight: 500; color: var(--white); }
+.testimonio-city { font-size: 11px; color: var(--white3); }
+.testimonio-actions { text-align: center; }
+
+/* ── ORACIÓN ── */
+.prayer-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+.prayer-info h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); color: var(--white); margin-bottom: 1rem; line-height: 1.3; }
+.prayer-info p { font-size: 15px; color: var(--white2); line-height: 1.7; margin-bottom: 1.5rem; }
+.prayer-promises { display: flex; flex-direction: column; gap: 0.75rem; }
+.promise { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--white2); }
+.promise-icon { color: var(--gold2); flex-shrink: 0; margin-top: 1px; }
+.prayer-form { background: var(--white5); border: 1px solid var(--border); border-radius: 20px; padding: 2rem; }
+.prayer-form h3 { font-family: var(--font-display); font-size: 20px; color: var(--white); margin-bottom: 1.5rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--white3); display: block; margin-bottom: 6px; font-weight: 500; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; background: rgba(6,13,36,0.6); border: 1px solid var(--border2); border-radius: 10px; padding: 11px 14px; color: var(--white); font-size: 14px; font-family: var(--font-body); transition: border-color 0.2s; outline: none; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--white3); }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group textarea { height: 110px; resize: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.submit-btn { width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2)); border: none; color: var(--navy); padding: 13px; border-radius: 10px; font-size: 14px; font-weight: 600; font-family: var(--font-body); cursor: pointer; transition: opacity 0.2s, transform 0.15s; margin-top: 0.5rem; }
+.submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.prayer-success { display: none; text-align: center; padding: 2rem; }
+.prayer-success .icon { font-size: 40px; margin-bottom: 1rem; }
+.prayer-success h4 { font-family: var(--font-display); font-size: 20px; color: var(--white); margin-bottom: 0.5rem; }
+.prayer-success p { font-size: 14px; color: var(--white2); }
+
+/* ── FOOTER ── */
+footer { background: #040a1c; border-top: 1px solid var(--border2); padding: 3.5rem 2rem 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; max-width: 1100px; margin: 0 auto 2.5rem; }
+.footer-brand .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; text-decoration: none; }
+.footer-brand .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.footer-brand .logo-text { font-family: var(--font-display); font-size: 16px; color: var(--white); }
+.footer-brand p { font-size: 13px; color: var(--white3); line-height: 1.7; margin-bottom: 1.25rem; max-width: 260px; }
+.footer-socials { display: flex; gap: 10px; }
+.social-btn { width: 36px; height: 36px; border-radius: 8px; background: var(--white5); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 15px; text-decoration: none; transition: border-color 0.2s, background 0.2s; cursor: pointer; }
+.social-btn:hover { border-color: var(--gold); background: rgba(201,148,58,0.1); }
+.footer-col h4 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold2); margin-bottom: 1rem; font-weight: 500; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul a { font-size: 13px; color: var(--white3); text-decoration: none; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--gold2); }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border2); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--white3); flex-wrap: wrap; gap: 0.5rem; }
+.footer-bottom span { color: var(--gold2); }
+
+/* ── SHARE MODAL ── */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(4,10,28,0.85); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.modal-overlay.active { display: flex; }
+.modal { background: #0c1640; border: 1px solid var(--border); border-radius: 20px; padding: 2rem; max-width: 400px; width: 90%; }
+.modal h3 { font-family: var(--font-display); font-size: 20px; color: var(--white); margin-bottom: 0.5rem; }
+.modal p { font-size: 13px; color: var(--white2); margin-bottom: 1.5rem; }
+.share-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.share-option { background: var(--white5); border: 1px solid var(--border2); border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; transition: border-color 0.2s; }
+.share-option:hover { border-color: var(--gold); }
+.share-option .icon { font-size: 20px; margin-bottom: 4px; }
+.share-option .label { font-size: 12px; color: var(--white2); }
+.share-url { display: flex; gap: 8px; margin-bottom: 1rem; }
+.share-url input { flex: 1; background: rgba(6,13,36,0.6); border: 1px solid var(--border2); border-radius: 8px; padding: 8px 12px; color: var(--white); font-size: 12px; font-family: var(--font-body); outline: none; }
+.copy-btn { background: var(--gold); border: none; color: var(--navy); padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; font-family: var(--font-body); cursor: pointer; white-space: nowrap; }
+.modal-close { width: 100%; background: transparent; border: 1px solid var(--border2); color: var(--white2); padding: 10px; border-radius: 10px; font-size: 13px; font-family: var(--font-body); cursor: pointer; transition: border-color 0.2s; }
+.modal-close:hover { border-color: var(--border); }
+
+/* ── TOAST ── */
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px); background: #1a3080; border: 1px solid var(--border); border-radius: 10px; padding: 12px 20px; font-size: 13px; color: var(--white); z-index: 2000; transition: transform 0.3s ease; pointer-events: none; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── MOBILE NAV ── */
+.mobile-nav { display: none; position: fixed; inset: 0; background: rgba(6,13,36,0.98); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+.mobile-nav.active { display: flex; }
+.mobile-nav a { font-size: 24px; font-family: var(--font-display); color: var(--white); text-decoration: none; }
+.mobile-nav a:hover { color: var(--gold2); }
+.mobile-close { position: absolute; top: 1.5rem; right: 2rem; font-size: 24px; color: var(--white); cursor: pointer; background: none; border: none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .topbar { display: none; }
+  .prayer-container { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .section { padding: 3.5rem 1.25rem; }
+  .section-full { padding: 3.5rem 1.25rem; }
+  .hero { padding: 3rem 1.25rem 5rem; }
+  nav { padding: 0 1.25rem; }
+}
+@media(max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .player-bottom { flex-wrap: wrap; justify-content: center; }
+}
+
+/* ── ANIMATIONS ── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>📍 Siquem Iglesia · Pergamino, Buenos Aires</span>
+  <div class="socials">
+    <a href="#" title="Facebook">Facebook</a>
+    <a href="#" title="Instagram">Instagram</a>
+    <a href="#" title="YouTube">YouTube</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">✦</div>
+    <div class="nav-logo-text">
+      Estación Victoria
+      <span>FM 90.7</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#versículo">Versículo</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#predicas">Prédicas</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#oracion" class="nav-cta">Pedido de oración</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#versículo" onclick="toggleMenu()">Versículo</a>
+  <a href="#horarios" onclick="toggleMenu()">Horarios</a>
+  <a href="#predicas" onclick="toggleMenu()">Prédicas</a>
+  <a href="#testimonios" onclick="toggleMenu()">Testimonios</a>
+  <a href="#oracion" onclick="toggleMenu()">Pedido de oración</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="live-pill">
+      <div class="live-dot"></div>
+      Transmisión en vivo
+    </div>
+    <h1>Estación <em>Victoria</em></h1>
+    <p class="hero-freq">FM 90.7 · Pergamino</p>
+    <p class="hero-sub">Radio cristiana de Siquem Iglesia Pergamino.<br>Un lugar de refugio, fe y esperanza.</p>
+
+    <div class="player-wrap">
+      <div class="player-card">
+        <div class="player-top">
+          <div class="player-art">📻</div>
+          <div class="player-meta">
+            <div class="label">Transmitiendo</div>
+            <div class="station">Estación Victoria</div>
+            <div class="church">Siquem Iglesia · FM 90.7</div>
+          </div>
+          <div class="eq-bars" id="eqBars" style="display:none">
+            <div class="eq-bar" style="height:40%"></div>
+            <div class="eq-bar" style="height:100%"></div>
+            <div class="eq-bar" style="height:60%"></div>
+            <div class="eq-bar" style="height:80%"></div>
+            <div class="eq-bar" style="height:40%"></div>
+          </div>
+        </div>
+        <div class="player-bottom">
+          <div class="vol-ctrl">
+            <span>🔈</span>
+            <input type="range" min="0" max="100" value="80" id="volSlider" oninput="setVolume(this.value)">
+            <span>🔊</span>
+          </div>
+          <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+          <button class="share-btn" onclick="openShare('Escuchá Estación Victoria FM 90.7', window.location.href)">
+            ↗ Compartir
+          </button>
+        </div>
+      </div>
+      <p class="stream-note">⚠ Stream en configuración · <a href="#oracion">Contactanos</a> para más info</p>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#predicas" class="btn-primary">Escuchar prédicas</a>
+      <a href="#oracion" class="btn-ghost">Pedido de oración</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-arrow">↓</div>
+    <span>Descubrí más</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VERSÍCULO DEL DÍA -->
+<section class="verse-section section-full" id="versículo">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-header fade-in">
+      <div class="section-tag">Cada día</div>
+      <h2 class="section-title">Versículo del día</h2>
+    </div>
+    <div class="verse-card fade-in">
+      <div class="verse-icon">✦</div>
+      <p class="verse-text" id="verseText">"Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz y no de mal, para daros el fin que esperáis."</p>
+      <div class="verse-ref" id="verseRef">Jeremías 29:11</div>
+      <div class="verse-actions">
+        <button class="verse-btn" onclick="newVerse()">↻ Otro versículo</button>
+        <button class="verse-btn" onclick="shareVerse()">↗ Compartir versículo</button>
+        <button class="verse-btn" onclick="copyVerse()">⎘ Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HORARIOS -->
+<section class="section" id="horarios">
+  <div class="section-header fade-in">
+    <div class="section-tag">Reuniones</div>
+    <h2 class="section-title">Horarios de reuniones</h2>
+    <p class="section-sub">Te esperamos en Siquem Iglesia Pergamino. Encontrá el horario que mejor se adapte a vos.</p>
+  </div>
+  <div class="schedule-grid">
+    <div class="schedule-card fade-in">
+      <div class="day">Entre semana</div>
+      <h3>Miércoles</h3>
+      <div class="schedule-times">
+        <div class="time-item"><div class="time-dot"></div>20:00 hs — Reunión general</div>
+      </div>
+    </div>
+    <div class="schedule-card fade-in">
+      <div class="day">Fin de semana</div>
+      <h3>Sábado</h3>
+      <div class="schedule-times">
+        <div class="time-item"><div class="time-dot"></div>20:00 hs — Reunión de adoración</div>
+      </div>
+    </div>
+    <div class="schedule-card fade-in">
+      <div class="day">Fin de semana</div>
+      <h3>Domingo</h3>
+      <div class="schedule-times">
+        <div class="time-item"><div class="time-dot"></div>10:00 hs — Reunión matutina</div>
+        <div class="time-item"><div class="time-dot"></div>20:00 hs — Reunión nocturna</div>
+      </div>
+    </div>
+    <div class="schedule-card fade-in" style="border-color: var(--border);">
+      <div class="day">Online · YouTube</div>
+      <h3>Transmisión en vivo</h3>
+      <div class="schedule-times">
+        <div class="time-item"><div class="time-dot"></div>Domingo 10:00 y 20:00 hs</div>
+      </div>
+      <div class="schedule-address">📍 Pergamino, Buenos Aires, Argentina</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRÉDICAS -->
+<section class="section" id="predicas">
+  <div class="section-header fade-in">
+    <div class="section-tag">Mensajes</div>
+    <h2 class="section-title">Prédicas recientes</h2>
+    <p class="section-sub">Escuchá y compartí los mensajes que Dios nos ha dado para edificar tu fe.</p>
+  </div>
+  <div class="predicas-grid">
+    <div class="predica-card fade-in">
+      <div class="predica-header">
+        <div class="predica-tag">Domingo</div>
+        <button class="predica-play" onclick="showToast('Prédica en reproducción')">▶</button>
+      </div>
+      <h4>Fe que mueve montañas</h4>
+      <div class="pastor">Pastor Marcos González</div>
+      <div class="predica-footer">
+        <div class="predica-dur">🎵 45 min</div>
+        <button class="predica-share" onclick="openShare('Fe que mueve montañas — Estación Victoria', window.location.href)">↗</button>
+      </div>
+    </div>
+    <div class="predica-card fade-in">
+      <div class="predica-header">
+        <div class="predica-tag">Miércoles</div>
+        <button class="predica-play" onclick="showToast('Prédica en reproducción')">▶</button>
+      </div>
+      <h4>El poder de la oración persistente</h4>
+      <div class="pastor">Pastor Lucas Herrera</div>
+      <div class="predica-footer">
+        <div class="predica-dur">🎵 38 min</div>
+        <button class="predica-share" onclick="openShare('El poder de la oración — Estación Victoria', window.location.href)">↗</button>
+      </div>
+    </div>
+    <div class="predica-card fade-in">
+      <div class="predica-header">
+        <div class="predica-tag">Domingo</div>
+        <button class="predica-play" onclick="showToast('Prédica en reproducción')">▶</button>
+      </div>
+      <h4>Identidad en Cristo</h4>
+      <div class="pastor">Pastor Marcos González</div>
+      <div class="predica-footer">
+        <div class="predica-dur">🎵 52 min</div>
+        <button class="predica-share" onclick="openShare('Identidad en Cristo — Estación Victoria', window.location.href)">↗</button>
+      </div>
+    </div>
+    <div class="predica-card fade-in">
+      <div class="predica-header">
+        <div class="predica-tag">Sábado</div>
+        <button class="predica-play" onclick="showToast('Prédica en reproducción')">▶</button>
+      </div>
+      <h4>Lugar de refugio</h4>
+      <div class="pastor">Pastor Marcos González</div>
+      <div class="predica-footer">
+        <div class="predica-dur">🎵 41 min</div>
+        <button class="predica-share" onclick="openShare('Lugar de refugio — Estación Victoria', window.location.href)">↗</button>
+      </div>
+    </div>
+    <div class="predica-card fade-in">
+      <div class="predica-header">
+        <div class="predica-tag">Miércoles</div>
+        <button class="predica-play" onclick="showToast('Prédica en reproducción')">▶</button>
+      </div>
+      <h4>Renovación espiritual</h4>
+      <div class="pastor">Pastor Lucas Herrera</div>
+      <div class="predica-footer">
+        <div class="predica-dur">🎵 44 min</div>
+        <button class="predica-share" onclick="openShare('Renovación espiritual — Estación Victoria', window.location.href)">↗</button>
+      </div>
+    </div>
+    <div class="predica-card fade-in" style="display:flex;align-items:center;justify-content:center;text-align:center;min-height:140px;">
+      <div>
+        <div style="font-size:28px;margin-bottom:8px;">📺</div>
+        <div style="font-size:14px;color:var(--white2);margin-bottom:8px;">Ver todos en YouTube</div>
+        <a href="#" class="btn-ghost" style="font-size:12px;padding:8px 16px;">Ver canal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios-section section-full" id="testimonios">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-header fade-in">
+      <div class="section-tag">Testimonios</div>
+      <h2 class="section-title">Lo que Dios está haciendo</h2>
+      <p class="section-sub">Historias reales de personas cuyas vidas fueron transformadas.</p>
+    </div>
+    <div class="testimonios-grid">
+      <div class="testimonio-card fade-in">
+        <div class="testimonio-quote">"</div>
+        <p class="testimonio-text">Escuchando Estación Victoria encontré paz en uno de los momentos más difíciles de mi vida. La Palabra de Dios me sostuvo.</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar">MG</div>
+          <div>
+            <div class="testimonio-name">María González</div>
+            <div class="testimonio-city">Pergamino, Buenos Aires</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio-card fade-in">
+        <div class="testimonio-quote">"</div>
+        <p class="testimonio-text">Las prédicas que escucho en la radio me acompañan cada mañana al trabajo. Dios me habla a través de este ministerio.</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar">CR</div>
+          <div>
+            <div class="testimonio-name">Carlos Rodríguez</div>
+            <div class="testimonio-city">Buenos Aires</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio-card fade-in">
+        <div class="testimonio-quote">"</div>
+        <p class="testimonio-text">Mandé un pedido de oración y sentí el amor de Dios a través de la comunidad. No estamos solos en esta vida.</p>
+        <div class="testimonio-author">
+          <div class="testimonio-avatar">AP</div>
+          <div>
+            <div class="testimonio-name">Ana Pérez</div>
+            <div class="testimonio-city">Rosario, Santa Fe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonio-actions fade-in">
+      <button class="btn-primary" onclick="showToast('¡Gracias! Pronto publicaremos tu testimonio')">Contar mi testimonio</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ORACIÓN -->
+<section class="section" id="oracion">
+  <div class="prayer-container">
+    <div class="prayer-info fade-in">
+      <div class="section-tag" style="text-align:left">Intercesión</div>
+      <h2>¿Tenés un pedido<br>de oración?</h2>
+      <p>Estaremos intercediendo por vos. No importa cuán grande o pequeña sea tu necesidad — Dios escucha y nosotros oramos juntos.</p>
+      <div class="prayer-promises">
+        <div class="promise"><span class="promise-icon">✦</span><span>Tu pedido es confidencial y tratado con amor</span></div>
+        <div class="promise"><span class="promise-icon">✦</span><span>La comunidad orará por tu necesidad</span></div>
+        <div class="promise"><span class="promise-icon">✦</span><span>"Orad sin cesar" — 1 Tesalonicenses 5:17</span></div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="prayer-form" id="prayerForm">
+        <h3>Enviá tu pedido</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tu nombre</label>
+            <input type="text" placeholder="María González" id="prayerName">
+          </div>
+          <div class="form-group">
+            <label>Tu ciudad</label>
+            <input type="text" placeholder="Pergamino" id="prayerCity">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tipo de pedido</label>
+          <select id="prayerType" style="background:rgba(6,13,36,0.6);border:1px solid var(--border2);border-radius:10px;padding:11px 14px;color:var(--white);font-size:14px;font-family:var(--font-body);width:100%;outline:none;appearance:none;">
+            <option value="">Seleccioná una categoría</option>
+            <option>Salud</option>
+            <option>Familia</option>
+            <option>Trabajo / Provisión</option>
+            <option>Espiritual</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tu pedido</label>
+          <textarea placeholder="Escribí tu pedido de oración aquí..." id="prayerText"></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitPrayer()">Enviar pedido de oración →</button>
+      </div>
+      <div class="prayer-success" id="prayerSuccess" style="display:none">
+        <div class="icon">🙏</div>
+        <h4>¡Tu pedido fue enviado!</h4>
+        <p>Estaremos orando por vos. Que Dios te bendiga y llene de paz.</p>
+        <br>
+        <button class="btn-ghost" onclick="resetPrayer()">Enviar otro pedido</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <div class="logo-icon">✦</div>
+        <div class="logo-text">Estación Victoria</div>
+      </a>
+      <p>Radio cristiana de Siquem Iglesia Pergamino. FM 90.7 · Un lugar de refugio, fe y esperanza para toda la familia.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" title="Facebook">f</a>
+        <a class="social-btn" href="#" title="Instagram">ig</a>
+        <a class="social-btn" href="#" title="YouTube">yt</a>
+        <a class="social-btn" href="#" title="WhatsApp">wa</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Radio</h4>
+      <ul>
+        <li><a href="#versículo">Versículo del día</a></li>
+        <li><a href="#predicas">Prédicas</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#oracion">Pedido de oración</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Iglesia</h4>
+      <ul>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Grupos de conexión</a></li>
+        <li><a href="#">Ofrendar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">Pergamino, Buenos Aires</a></li>
+        <li><a href="mailto:info@estacionvictoria.com.ar">info@estacionvictoria.com.ar</a></li>
+        <li><a href="#">FM 90.7</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Estación <span>Victoria</span> FM 90.7 · Siquem Iglesia Pergamino</span>
+    <span>Hecho con ♥ para la gloria de Dios</span>
+  </div>
+</footer>
+
+<!-- SHARE MODAL -->
+<div class="modal-overlay" id="shareModal" onclick="closeShare(event)">
+  <div class="modal">
+    <h3>Compartir</h3>
+    <p id="shareTitle">Estación Victoria FM 90.7</p>
+    <div class="share-options">
+      <div class="share-option" onclick="shareOn('whatsapp')">
+        <div class="icon">💬</div>
+        <div class="label">WhatsApp</div>
+      </div>
+      <div class="share-option" onclick="shareOn('facebook')">
+        <div class="icon">📘</div>
+        <div class="label">Facebook</div>
+      </div>
+      <div class="share-option" onclick="shareOn('twitter')">
+        <div class="icon">🐦</div>
+        <div class="label">Twitter/X</div>
+      </div>
+      <div class="share-option" onclick="shareOn('email')">
+        <div class="icon">✉️</div>
+        <div class="label">Email</div>
+      </div>
+    </div>
+    <div class="share-url">
+      <input type="text" id="shareUrl" value="" readonly>
+      <button class="copy-btn" onclick="copyUrl()">Copiar</button>
+    </div>
+    <button class="modal-close" onclick="closeShareModal()">Cerrar</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- AUDIO ELEMENT -->
+<audio id="radioAudio" preload="none">
+  <!-- Cuando tengas la URL del stream, ponela acá: -->
+  <!-- <source src="https://tu-stream-url.com/radio.mp3" type="audio/mpeg"> -->
+</audio>
+
+<script>
+// ── PLAYER ──
+let isPlaying = false;
+const audio = document.getElementById('radioAudio');
+const playBtn = document.getElementById('playBtn');
+const eqBars = document.getElementById('eqBars');
+const STREAM_URL = ''; // Ponés acá tu URL de stream cuando la tengas
+
+function togglePlay() {
+  if (!STREAM_URL) {
+    showToast('Stream en configuración. ¡Pronto disponible!');
+    return;
+  }
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    playBtn.textContent = '▶';
+    eqBars.style.display = 'none';
+  } else {
+    audio.src = STREAM_URL;
+    audio.play().then(() => {
+      isPlaying = true;
+      playBtn.textContent = '⏸';
+      eqBars.style.display = 'flex';
+    }).catch(() => showToast('No se pudo conectar al stream'));
+  }
+}
+
+function setVolume(val) {
+  audio.volume = val / 100;
+}
+
+// ── VERSÍCULOS ──
+const verses = [
+  { text: '"Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz y no de mal, para daros el fin que esperáis."', ref: 'Jeremías 29:11' },
+  { text: '"Todo lo puedo en Cristo que me fortalece."', ref: 'Filipenses 4:13' },
+  { text: '"El Señor es mi pastor; nada me faltará."', ref: 'Salmos 23:1' },
+  { text: '"Confía en el Señor con todo tu corazón, y no te apoyes en tu propia prudencia."', ref: 'Proverbios 3:5' },
+  { text: '"Yo soy el camino, la verdad y la vida."', ref: 'Juan 14:6' },
+  { text: '"Porque de tal manera amó Dios al mundo, que dio a su Hijo unigénito."', ref: 'Juan 3:16' },
+  { text: '"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."', ref: 'Mateo 11:28' },
+  { text: '"El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente."', ref: 'Salmos 91:1' },
+  { text: '"No os afanéis por nada; sino sean conocidas vuestras peticiones delante de Dios."', ref: 'Filipenses 4:6' },
+  { text: '"Esfuérzate y sé valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo."', ref: 'Josué 1:9' },
+];
+let currentVerse = 0;
+
+function newVerse() {
+  currentVerse = (currentVerse + 1) % verses.length;
+  const v = verses[currentVerse];
+  document.getElementById('verseText').textContent = v.text;
+  document.getElementById('verseRef').textContent = v.ref;
+}
+
+function shareVerse() {
+  const v = verses[currentVerse];
+  openShare(v.text + ' — ' + v.ref, window.location.href + '#versículo');
+}
+
+function copyVerse() {
+  const v = verses[currentVerse];
+  const text = v.text + ' — ' + v.ref;
+  navigator.clipboard.writeText(text).then(() => showToast('Versículo copiado ✓')).catch(() => showToast('No se pudo copiar'));
+}
+
+// ── SHARE MODAL ──
+let shareData = { title: '', url: '' };
+
+function openShare(title, url) {
+  shareData = { title, url };
+  document.getElementById('shareTitle').textContent = title;
+  document.getElementById('shareUrl').value = url;
+  document.getElementById('shareModal').classList.add('active');
+}
+
+function closeShareModal() {
+  document.getElementById('shareModal').classList.remove('active');
+}
+
+function closeShare(e) {
+  if (e.target === document.getElementById('shareModal')) closeShareModal();
+}
+
+function shareOn(platform) {
+  const { title, url } = shareData;
+  const enc = encodeURIComponent;
+  const links = {
+    whatsapp: `https://wa.me/?text=${enc(title + ' ' + url)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`,
+    email: `mailto:?subject=${enc(title)}&body=${enc(url)}`,
+  };
+  window.open(links[platform], '_blank');
+  closeShareModal();
+}
+
+function copyUrl() {
+  const input = document.getElementById('shareUrl');
+  navigator.clipboard.writeText(input.value).then(() => {
+    showToast('Link copiado ✓');
+    closeShareModal();
+  });
+}
+
+// ── PRAYER FORM ──
+function submitPrayer() {
+  const name = document.getElementById('prayerName').value.trim();
+  const text = document.getElementById('prayerText').value.trim();
+  if (!name || !text) { showToast('Por favor completá tu nombre y pedido'); return; }
+  document.getElementById('prayerForm').style.display = 'none';
+  document.getElementById('prayerSuccess').style.display = 'block';
+}
+
+function resetPrayer() {
+  document.getElementById('prayerName').value = '';
+  document.getElementById('prayerCity').value = '';
+  document.getElementById('prayerText').value = '';
+  document.getElementById('prayerType').selectedIndex = 0;
+  document.getElementById('prayerForm').style.display = 'block';
+  document.getElementById('prayerSuccess').style.display = 'none';
+}
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  document.getElementById('mobileNav').classList.toggle('active');
+}
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
